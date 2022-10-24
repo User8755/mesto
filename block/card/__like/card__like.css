@@ -1,0 +1,7 @@
+.card__like:hover {
+  opacity: .5;
+}
+
+.card__like:active {
+  color: #000;
+}

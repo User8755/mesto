@@ -1,0 +1,15 @@
+.photo {
+  margin: 47.25px auto 0;
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fill, 282px);
+  gap: 20px 17px;
+  max-width: 880px;
+}
+
+@media screen and (max-width: 1000px) {
+  .photo {
+    max-width: 67%;
+    margin-top: 36px;
+  }
+}

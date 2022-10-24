@@ -1,0 +1,18 @@
+.profile__container {
+  display: flex;
+  align-items: baseline;
+}
+
+@media screen and (max-width: 1000px) {
+  .profile__container {
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .profile__container {
+    margin-left: 65px;
+    max-width: 217px;
+    max-height: 26px;
+  }
+}
