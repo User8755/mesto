@@ -3,5 +3,8 @@
 }
 
 .card__like:active {
-  color: #000;
+  background-image: url(../../../images/Union.svg);
+  background-repeat: no-repeat;
+  background-position: 0;
+  opacity: 1;
 }

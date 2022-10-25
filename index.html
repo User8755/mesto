@@ -10,7 +10,6 @@
   <div class="page">
     <header class="header">
       <img src="./images/logo.svg" alt="Логотип сайта" class="header__logo">
-      <div class="header__line"></div>
     </header>
     <main>
       <section class="profile">
@@ -18,58 +17,60 @@
         <div class="profile__info">
           <div class="profile__container">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
-            <button class="profile__edit" title="Редактировать профиль"></button> <!--Переписать класс-->
+            <button class="profile__btn-edit" title="Редактировать профиль"></button> <!--Переписать класс c profile__edit в profile__btn-edit (не забыть исправить в стилях)-->
           </div>
-          <p class="profile__work">Исследователь океана</p> <!--Расхождение с макетом при отступе 16px-->
+          <p class="profile__work">Исследователь океана</p> 
         </div>
         <button class="profile__btn-add" title="Добавить изображение"></button>
       </section>
       <section class="photo">
         <div class="card">
-          <img src="./images/karachaevsk.jpg" alt="" class="card__img">
+          <img src="./images/Ilmenskiy-zapovednik.jpg" alt="" class="card__img">
           <div class="card__description">
-            <p class="card__title">Карачаевск</p>
+            <p class="card__title">Ильменский заповедник</p>
             <img src="./images/like.svg" alt="" class="card__like">
           </div>
         </div>
         <div class="card">
-          <img src="./images/karachaevsk.jpg" alt="" class="card__img">
+          <img src="./images/taganai.JPG" alt="" class="card__img">
           <div class="card__description">
-            <p class="card__title">Карачаевск</p>
+            <p class="card__title">Таганай</p>
             <img src="./images/like.svg" alt="" class="card__like">
           </div>
         </div>
         <div class="card">
-          <img src="./images/karachaevsk.jpg" alt="" class="card__img">
+          <img src="./images/chebarkyl.jpg" alt="" class="card__img">
           <div class="card__description">
-            <p class="card__title">Карачаевск</p>
+            <p class="card__title">Чебаркуль</p>
             <img src="./images/like.svg" alt="" class="card__like">
           </div>
         </div>
         <div class="card">
-          <img src="./images/karachaevsk.jpg" alt="" class="card__img">
+          <img src="./images/chelabinsk.jpg" alt="" class="card__img">
           <div class="card__description">
-            <p class="card__title">Карачаевск</p>
+            <p class="card__title">Челябинск</p>
             <img src="./images/like.svg" alt="" class="card__like">
           </div>
         </div>
         <div class="card">
-          <img src="./images/karachaevsk.jpg" alt="" class="card__img">
+          <img src="./images/izymrydni.jpg" alt="" class="card__img">
           <div class="card__description">
-            <p class="card__title">Карачаевск</p>
+            <p class="card__title">Изумрудный карьер</p>
             <img src="./images/like.svg" alt="" class="card__like">
           </div>
         </div>
         <div class="card">
-          <img src="./images/karachaevsk.jpg" alt="" class="card__img">
+          <img src="./images/tyrgoyk.jpg" alt="" class="card__img">
           <div class="card__description">
-            <p class="card__title">Карачаевск</p>
+            <p class="card__title">Тургояк</p>
             <img src="./images/like.svg" alt="" class="card__like">
           </div>
         </div>
       </section>
     </main>
-    <footer></footer>
+    <footer class="footer">
+      <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
+    </footer>
   </div>
 </body>
 </html>

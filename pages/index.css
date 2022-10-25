@@ -12,13 +12,17 @@
 @import url(../block/profile/__name/profile__name.css);
 @import url(../block/profile/__work/profile__work.css);
 @import url(../block/profile/__info/profile__info.css);
-@import url(../block/profile/__edit/profile__edit.css);
+@import url(../block/profile/__btn-edit/profile__edit.css);
 @import url(../block/profile/__btn-add/profile__btn-add.css);
 @import url(../block/profile/__container/profile__container.css);
 /* Блок photo */
 @import url(../block/photo/photo.css);
+/* Блоки card для блока photo */
 @import url(../block/card/card.css);
 @import url(../block/card/__img/card__img.css);
 @import url(../block/card/__description/card__description.css);
 @import url(../block/card/__title/card__title.css);
 @import url(../block/card/__like/card__like.css);
+/* Блок footer */
+@import url(../block/footer/footer.css);
+@import url(../block/footer/__copyright/footer__copyright.css);
