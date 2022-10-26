@@ -1,3 +1,7 @@
+.card__like {
+  cursor: pointer;
+}
+
 .card__like:hover {
   opacity: .5;
 }
