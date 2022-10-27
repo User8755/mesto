@@ -5,7 +5,6 @@
 /* Блок header */
 @import url(../block/header/header.css);
 @import url(../block/header/__logo/header__logo.css);
-@import url(../block/header/__line/header__line.css);
 /* Блок profile */
 @import url(../block/profile/profile.css);
 @import url(../block/profile/__avatar/profile__avatar.css);
@@ -33,3 +32,4 @@
 @import url(../block/popup/__input/popup__input.css);
 @import url(../block/popup/__btn-save/popup__btn-save.css);
 @import url(../block/popup/__btn-exit/popup__btn-exit.css);
+@import url(../block/popup/popup_visible.css);
