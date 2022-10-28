@@ -4,6 +4,7 @@
   background-color: #fff;
   border-radius: 10px;
   position: relative;
+  padding: 0;
 }
 
 @media screen and (max-width: 530px) {
