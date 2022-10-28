@@ -11,3 +11,6 @@
 * CSS
 * Figma
 * JavaScript
+
+## Страница на GitHub page:
+* https://user8755.github.io/mesto/
