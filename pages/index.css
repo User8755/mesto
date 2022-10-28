@@ -1,9 +1,11 @@
+/* Базовые настройки */
 @import url(../vendor/normalize.css);
 @import url(../vendor/font/Inter_Web/inter.css);
 @import url(../block/root/root.css);
 @import url(../block/page/page.css);
 @import url(../block/button/button_white.css);
 @import url(../block/button/button.css);
+@import url(../block/fieldset/fieldset.css);
 /* Блок header */
 @import url(../block/header/header.css);
 @import url(../block/header/__logo/header__logo.css);
@@ -36,4 +38,3 @@
 @import url(../block/popup/__btn-save/popup__btn-save.css);
 @import url(../block/popup/__btn-exit/popup__btn-exit.css);
 @import url(../block/popup/popup_visible.css);
-@import url(../block/fieldset/fieldset.css);
