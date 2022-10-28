@@ -7,7 +7,13 @@
   max-width: 880px;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1024px) {
+  .photo {
+    max-width: 80%;
+  }
+}
+
+@media screen and (max-width: 320px) {
   .photo {
     max-width: 67%;
     margin-top: 36px;
