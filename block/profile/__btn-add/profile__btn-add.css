@@ -5,22 +5,14 @@
   background-position: center;
   border: 2px solid #fff;
   border-radius: 2px;
-  width: 150px;
+  min-width: 150px;
   height: 50px;
   padding: 0;
-  position: absolute;
-  right: 0;
-  cursor: pointer;
-}
-
-.profile__btn-add:hover {
-  opacity: 0.6;
 }
 
 @media screen and (max-width: 1000px) {
   .profile__btn-add {
-    position: relative;
-    width: 88.13%;
+    max-width: 88.13%;
     margin: 34px auto 0;
     background-size: 16px;
     width: 282px;

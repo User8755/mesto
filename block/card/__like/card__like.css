@@ -1,14 +1,6 @@
 .card__like {
-  cursor: pointer;
-}
-
-.card__like:hover {
-  opacity: .5;
-}
-
-.card__like:active {
-  background-image: url(../../../images/Union.svg);
+  background-image: url(../../../images/like.svg);
+  width: 22px;
   background-repeat: no-repeat;
   background-position: 0;
-  opacity: 1;
 }

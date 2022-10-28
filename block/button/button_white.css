@@ -1,0 +1,4 @@
+.button_white:hover {
+  cursor: pointer;
+  opacity: .6;
+}
