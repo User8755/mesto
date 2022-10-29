@@ -4,3 +4,8 @@
   background-repeat: no-repeat;
   background-position: 0;
 }
+
+.card__like:hover {
+  cursor: pointer;
+  opacity: .6;
+}

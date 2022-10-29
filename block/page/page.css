@@ -1,6 +1,7 @@
 .page {
   max-width: 1280px;
   margin: 0 auto;
-  font-family: inter;
-  border: 1px red solid; /* НЕ ЗАБУДЬ УДАЛИТЬ РАМКУ ЖЕНЯ!!! */
+  font-family: inter, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }

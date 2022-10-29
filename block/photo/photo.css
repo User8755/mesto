@@ -1,5 +1,5 @@
 .photo {
-  margin: 47.25px auto 0;
+  margin: 48.25px auto 0;
   display: grid;
   justify-content: center;
   grid-template-columns: repeat(auto-fill, 282px);

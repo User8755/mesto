@@ -2,5 +2,5 @@
   padding: 0;
   border: none;
   background-color: #fff;
-  transition: .7s ease;
+  transition: opacity .7s ease;
 }

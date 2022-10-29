@@ -1,6 +1,12 @@
 .card__description {
   display: flex;
   justify-content: space-between;
-  margin: 25px 20px 0 21px;
+  margin: 24px 20px 0 21px;
   max-width: 246px;
+}
+
+@media screen and (max-width: 320px) {
+  .card__description {
+    margin-top: 22px;
+  }
 }

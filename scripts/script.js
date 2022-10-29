@@ -4,8 +4,8 @@ let exitPopup = document.querySelector('.popup__btn-exit')
 let name = document.querySelector ('.profile__name');
 let work = document.querySelector ('.profile__work')
 let form = document.querySelector ('.popup__container');
-let nameInput = document.querySelector ('.popup__input_name');
-let workInput =  document.querySelector ('.popup__input_work');
+let nameInput = document.querySelector ('.popup__input_type_name');
+let workInput =  document.querySelector ('.popup__input_type_work');
 
 function popupVisible () {
   popup.classList.add('popup_visible');
