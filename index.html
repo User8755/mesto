@@ -24,48 +24,15 @@
         <button class="profile__btn-add button" title="Добавить изображение" type="button"></button>
       </section>
       <section class="photo">
-        <article class="card">
-          <img src="./images/Ilmenskiy-zapovednik.jpg" alt="Ильменский заповедник" class="card__img">
-          <div class="card__description">
-            <h3 class="card__title">Ильменский заповедник</h3>
-            <button type="button" class="card__like button"></button>
-          </div>
-        </article>
-        <article class="card">
-          <img src="./images/taganai.JPG" alt="Таганай" class="card__img">
-          <div class="card__description">
-            <h3 class="card__title">Таганай</h3>
-            <button type="button" class="card__like button"></button>
-          </div>
-        </article>
-        <article class="card">
-          <img src="./images/chebarkyl.jpg" alt="Чебаркуль" class="card__img">
-          <div class="card__description">
-            <h3 class="card__title">Чебаркуль</h3>
-            <button type="button" class="card__like button"></button>
-          </div>
-        </article>
-        <article class="card">
-          <img src="./images/chelabinsk.jpg" alt="Челябинск" class="card__img">
-          <div class="card__description">
-            <h3 class="card__title">Челябинск</h3>
-            <button type="button" class="card__like button"></button>
-          </div>
-        </article>
-        <article class="card">
-          <img src="./images/izymrydni.jpg" alt="Изумрудный карьер" class="card__img">
-          <div class="card__description">
-            <h3 class="card__title">Изумрудный карьер</h3>
-            <button type="button" class="card__like button"></button>
-          </div>
-        </article>
-        <article class="card">
-          <img src="./images/tyrgoyk.jpg" alt="Тургояк" class="card__img">
-          <div class="card__description">
-            <h3 class="card__title">Тургояк</h3>
-            <button type="button" class="card__like button"></button>
-          </div>
-        </article>
+        <template class="photo-card">
+          <article class="card">
+            <img src="" alt="" class="card__img">
+            <div class="card__description">
+              <h3 class="card__title"></h3>
+              <button type="button" class="card__like button"></button>
+            </div>
+          </article>
+        </template>
       </section>
     </main>
     <footer class="footer">
@@ -82,6 +49,19 @@
           <button class="popup__btn-save button" type="submit">Сохранить</button>
         </form>
         <button class="popup__btn-exit button" type="button"></button>
+      </div>
+    </section>
+    <section class="popup popup__add">
+      <div class="popup__container popup__add_container">
+        <h2 class="popup__title">Новое место</h2>
+        <form name="form-submit">
+          <fieldset class="popup__fieldset">
+            <input type="text" name="place-name" placeholder="Название" class="popup__input popup__input_type_place-name">
+            <input  type="text" name="url-img" placeholder="Ссылка на картинку" class="popup__input popup__input_type_url-img">
+          </fieldset>
+          <button class="popup__btn-save popup__add_btn-save button" type="submit">Сохранить</button>
+        </form>
+        <button class="popup__btn-exit popup__add_btn-exit button" type="button"></button>
       </div>
     </section>
   </div>
