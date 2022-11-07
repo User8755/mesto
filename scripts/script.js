@@ -15,7 +15,6 @@ const photoCard = document.querySelector ('.photo-card').content;
 const btnAdd = document.querySelector ('.profile__btn-add');
 const namePlaceInput = document.querySelector ('.popup__input_type_place-name');
 const urlImgInput = document.querySelector ('.popup__input_type_url-img');
-const popupAddSave = document.querySelector('.popup__add_btn-exit');
 const popupAddBtnSave = document.querySelector ('.popup__add_btn-save');
 const btnLike = document.querySelector ('.card__like');
 
@@ -83,8 +82,8 @@ function inputSubmitPhoto (evt) {
   addCard.querySelector('.card__img').src = initialCards[0].link;
   addCard.querySelector('.card__img').alt = initialCards[0].name;
   addCard.querySelector('.card__title').textContent = initialCards[0].name;
-  addCard.querySelector('.card__btn-delete').addEventListener('click', (evt)=>{
-    evt.target.closest('.card').remove();
+  addCard.querySelector('.card__like').addEventListener('click', (evt)=>{
+    evt.target.classList.toggle('card__like_active');
   });
   addCard.querySelector('.card__btn-delete').addEventListener('click', (evt)=>{
     evt.target.closest('.card').remove();
@@ -115,4 +114,3 @@ exitProfilEdit.addEventListener ('click', popupExit);
 btnAdd.addEventListener ('click', popupAddVisible);
 exitPopupAdd.addEventListener ('click', popupAddExit);
 formAdd.addEventListener ('submit', inputSubmitPhoto);
-popupAddSave.addEventListener ('click', inputSubmitPhoto);
