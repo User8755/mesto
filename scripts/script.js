@@ -15,8 +15,6 @@ const photoCard = document.querySelector ('.photo-card').content;
 const btnAdd = document.querySelector ('.profile__btn-add');
 const namePlaceInput = document.querySelector ('.popup__input_type_place-name');
 const urlImgInput = document.querySelector ('.popup__input_type_url-img');
-const popupAddBtnSave = document.querySelector ('.popup__add_btn-save');
-const btnLike = document.querySelector ('.card__like');
 
 
 const initialCards = [
