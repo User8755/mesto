@@ -24,16 +24,6 @@
         <button class="profile__btn-add button" title="Добавить изображение" type="button"></button>
       </section>
       <section class="photo">
-        <template class="photo-card">
-          <article class="card">
-            <button class="card__btn-delete button"></button>
-            <img src="" alt="" class="card__img">
-            <div class="card__description">
-              <h3 class="card__title"></h3>
-              <button type="button" class="card__like button"></button>
-            </div>
-          </article>
-        </template>
       </section>
     </main>
     <footer class="footer">
@@ -75,6 +65,16 @@
       </div>
     </section>
   </div>
+  <template class="photo-card">
+    <article class="card">
+      <button class="card__btn-delete button"></button>
+      <img src="" alt="" class="card__img">
+      <div class="card__description">
+        <h3 class="card__title"></h3>
+        <button type="button" class="card__like button"></button>
+      </div>
+    </article>
+  </template>
   <script src="./scripts/script.js"></script>
 </body>
 </html>
