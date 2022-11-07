@@ -48,6 +48,7 @@ const initialCards = [
   }
 ];
 
+// Popup профиля
 function popupVisible () {
   popup.classList.add('popup_visible');
   nameInput.value = nameProfile.textContent;
@@ -58,14 +59,6 @@ function popupExit() {
   popup.classList.remove('popup_visible')
 };
 
-function popupAddVisible () {
-  popupAdd.classList.add('popup_visible');
-};
-
-function popupAddExit() {
-  popupAdd.classList.remove('popup_visible')
-};
-
 function formSubmitHandler (evt) {
   evt.preventDefault();
   nameProfile.textContent = `${nameInput.value}`;
@@ -73,7 +66,16 @@ function formSubmitHandler (evt) {
   popupExit();
 };
 
+// Popup карточек
+function popupAddVisible () {
+  popupAdd.classList.add('popup_visible');
+};
 
+function popupAddExit() {
+  popupAdd.classList.remove('popup_visible');
+};
+
+// Добавление карточек
 function inputSubmitPhoto (evt) {
   evt.preventDefault();
   initialCards.unshift({name: namePlaceInput.value, link: urlImgInput.value});
@@ -81,25 +83,32 @@ function inputSubmitPhoto (evt) {
   addCard.querySelector('.card__img').src = initialCards[0].link;
   addCard.querySelector('.card__img').alt = initialCards[0].name;
   addCard.querySelector('.card__title').textContent = initialCards[0].name;
-  addCard.querySelector('.card__like').addEventListener('click', (evt)=>{
-    evt.target.classList.toggle('card__like_active')
-  })
+  addCard.querySelector('.card__btn-delete').addEventListener('click', (evt)=>{
+    evt.target.closest('.card').remove();
+  });
+  addCard.querySelector('.card__btn-delete').addEventListener('click', (evt)=>{
+    evt.target.closest('.card').remove();
+  }) 
   photo.prepend(addCard);
   popupAddExit();
 };
 
+// Базовая загрузка карточек
 initialCards.forEach((element) => {
   const addCard = photoCard.cloneNode(true);
   addCard.querySelector('.card__img').src = element.link;
   addCard.querySelector('.card__img').alt = element.name;
   addCard.querySelector('.card__title').textContent = element.name;
   addCard.querySelector('.card__like').addEventListener('click', (evt)=>{
-    evt.target.classList.toggle('card__like_active')
+    evt.target.classList.toggle('card__like_active');
+  })
+  addCard.querySelector('.card__btn-delete').addEventListener('click', (evt)=>{
+    evt.target.closest('.card').remove();
   })
   photo.append(addCard);
 });
 
-
+// Вызовы функций
 form.addEventListener('submit', formSubmitHandler);
 openProfileEdit.addEventListener ('click', popupVisible);
 exitProfilEdit.addEventListener ('click', popupExit);

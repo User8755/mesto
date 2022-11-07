@@ -2,3 +2,7 @@
   background-image: url(../../../../images/Union.svg);
   opacity: 1;
 }
+
+.card__like_active:hover {
+  opacity: 1;
+}
