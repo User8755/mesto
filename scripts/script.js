@@ -15,7 +15,9 @@ const photoCard = document.querySelector ('.photo-card').content;
 const btnAdd = document.querySelector ('.profile__btn-add');
 const namePlaceInput = document.querySelector ('.popup__input_type_place-name');
 const urlImgInput = document.querySelector ('.popup__input_type_url-img');
-
+const popupImg = document.querySelector ('.popup__img-open');
+const imgBtn = document.querySelector ('.card__img');
+const exitPopupImg = document.querySelector('.popup__img_btn-exit')
 
 const initialCards = [
 
@@ -52,7 +54,7 @@ function popupVisible () {
   workInput.value = work.textContent;
 };
 
-function popupExit() {
+function popupExit () {
   popup.classList.remove('popup_visible')
 };
 
@@ -68,7 +70,7 @@ function popupAddVisible () {
   popupAdd.classList.add('popup_visible');
 };
 
-function popupAddExit() {
+function popupAddExit () {
   popupAdd.classList.remove('popup_visible');
 };
 
@@ -85,7 +87,7 @@ function inputSubmitPhoto (evt) {
   });
   addCard.querySelector('.card__btn-delete').addEventListener('click', (evt)=>{
     evt.target.closest('.card').remove();
-  }) 
+  }),
   photo.prepend(addCard);
   popupAddExit();
 };
@@ -105,6 +107,18 @@ initialCards.forEach((element) => {
   photo.append(addCard);
 });
 
+function popupImgVisible () {
+  popupImg.classList.add('popup_visible');
+  document.querySelector('.popup__img').src = document.querySelector('.card__img').src;
+  document.querySelector('.popup__img').alt = document.querySelector('.card__title').textContent;
+  document.querySelector('.popup__figcaption').textContent = document.querySelector('.card__title').textContent;
+};
+
+function popupImgExit () {
+  popupImg.classList.remove('popup_visible')
+}
+
+
 // Вызовы функций
 form.addEventListener('submit', formSubmitHandler);
 openProfileEdit.addEventListener ('click', popupVisible);
@@ -112,3 +126,4 @@ exitProfilEdit.addEventListener ('click', popupExit);
 btnAdd.addEventListener ('click', popupAddVisible);
 exitPopupAdd.addEventListener ('click', popupAddExit);
 formAdd.addEventListener ('submit', inputSubmitPhoto);
+exitPopupImg.addEventListener ('click', popupImgExit);
