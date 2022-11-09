@@ -1,12 +1,12 @@
 const popup = document.querySelector ('.popup');
-const popupAdd = document.querySelector ('.popup__add');
+const popupAdd = document.querySelector ('.popup_add');
 const openProfileEdit = document.querySelector ('.profile__btn-edit');
 const exitProfilEdit = document.querySelector ('.popup__btn-exit')
-const exitPopupAdd = document.querySelector ('.popup__add_btn-exit')
+const exitPopupAdd = document.querySelector ('.popup__btn-exit_add')
 const nameProfile = document.querySelector ('.profile__name');
 const work = document.querySelector ('.profile__work')
 const form = document.querySelector ('.popup__container');
-const formAdd = document.querySelector ('.popup__add_container');
+const formAdd = document.querySelector ('.popup__container_add');
 const nameInput = document.querySelector ('.popup__input_type_name');
 const workInput =  document.querySelector ('.popup__input_type_work');
 const photoCard = document.querySelector ('.photo-card').content;
@@ -15,8 +15,8 @@ const photo = document.querySelector ('.photo');
 const btnAdd = document.querySelector ('.profile__btn-add');
 const namePlaceInput = document.querySelector ('.popup__input_type_place-name');
 const urlImgInput = document.querySelector ('.popup__input_type_url-img');
-const popupImg = document.querySelector ('.popup__img-open');
-const exitPopupImg = document.querySelector('.popup__img_btn-exit');
+const popupImg = document.querySelector ('.popup_img-open');
+const exitPopupImg = document.querySelector('.popup__btn-exit_img');
 const cardImg = document.querySelector('.card__img');
 
 const initialCards = [
