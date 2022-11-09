@@ -18,6 +18,7 @@ const urlImgInput = document.querySelector ('.popup__input_type_url-img');
 const popupImg = document.querySelector ('.popup_img-open');
 const exitPopupImg = document.querySelector('.popup__btn-exit_img');
 const cardImg = document.querySelector('.card__img');
+//Нужно упорядочить переменные
 
 const initialCards = [
 
@@ -74,36 +75,7 @@ const popupAddExit = () => {
   popupAdd.classList.remove('popup_visible');
 };
 
-// Добавление карточек
-const inputSubmitPhoto = (evt) => {
-  evt.preventDefault();
-  initialCards.unshift({name: namePlaceInput.value, link: urlImgInput.value});
-  const addCard = photoCard.cloneNode(true);
-  addCard.querySelector('.card__img').src = initialCards[0].link;
-  addCard.querySelector('.card__img').alt = initialCards[0].name;
-  addCard.querySelector('.card__title').textContent = initialCards[0].name;
-  addCard.querySelector('.card__like').addEventListener('click', (evt)=>{
-    evt.target.classList.toggle('card__like_active');
-  });
-  addCard.querySelector('.card__btn-delete').addEventListener('click', (evt)=>{
-    evt.target.closest('.card').remove();
-  });
-  addCard.querySelector('.card__img').addEventListener('click', (evt)=>{
-    popupImgVisible(evt)
-  });
-  photo.prepend(addCard);
-  popupAddExit();
-};
-
-const  popupImgVisible = (evt) => {
-  popupImg.classList.add('popup_visible');
-  document.querySelector('.popup__img').src = evt.target.src;
-  document.querySelector('.popup__img').alt = evt.target.alt;
-  document.querySelector('.popup__figcaption').textContent = evt.target.alt;
-};
-
-// Базовая загрузка карточек
-initialCards.forEach((element) => {
+const createCard = (element) => {
   const addCard = photoCard.cloneNode(true);
   addCard.querySelector('.card__img').src = element.link;
   addCard.querySelector('.card__img').alt = element.name;
@@ -117,9 +89,31 @@ initialCards.forEach((element) => {
   addCard.querySelector('.card__img').addEventListener('click', (evt)=>{
     popupImgVisible(evt)
   });
-  photo.append(addCard);
-});
+  photo.prepend(addCard);
+}
 
+// Базовая загрузка карточек
+initialCards.forEach(item => createCard(item));
+
+// Добавление карточек
+const inputSubmitPhoto = (evt) => {
+  evt.preventDefault();
+  initialCards.unshift({name: namePlaceInput.value, link: urlImgInput.value});
+  const element = initialCards[0];
+  createCard(element);
+  popupAddExit();
+};
+
+//попап с оригиналом картинки
+const  popupImgVisible = (evt) => {
+  popupImg.classList.add('popup_visible');
+  const cardTitle = document.querySelector('.card__title');
+  document.querySelector('.popup__img').src = evt.target.src;
+  document.querySelector('.popup__img').alt = evt.target.alt;
+  document.querySelector('.popup__figcaption').textContent = evt.target.alt;
+};
+
+//закртытие попап с картинкой
 const  popupImgExit = () => {
   popupImg.classList.remove('popup_visible');
 }
