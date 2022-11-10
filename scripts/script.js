@@ -51,18 +51,21 @@ const createCard = (element) => {
   addCard.querySelector('.card__img').addEventListener('click', (evt)=>{
     popupImgVisible(evt)
   });
-  photo.prepend(addCard);
+  return addCard
+}
+
+const renderCard = (addCard) => {
+  photo.prepend(addCard)
 }
 
 // Базовая загрузка карточек
-initialCards.forEach(item => createCard(item));
+initialCards.forEach(item => renderCard(createCard(item)));
 
 // Добавление карточек
 const inputSubmitPhoto = (evt) => {
   evt.preventDefault();
-  initialCards.unshift({name: namePlaceInput.value, link: urlImgInput.value});
-  const element = initialCards[0];
-  createCard(element);
+  const input = {name: namePlaceInput.value, link: urlImgInput.value};
+  renderCard(createCard(input));
   popupExit(popupAdd);
 };
 
