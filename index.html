@@ -29,8 +29,8 @@
     <footer class="footer">
       <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
     </footer>
-    <section class="popup">
-      <div class="popup__container">
+    <section class="popup popup_type_profile">
+      <div class="popup__container popup__container_edit">
         <h2 class="popup__title">Редактировать профиль</h2>
         <form name="form-submit">
           <fieldset class="popup__fieldset">
@@ -39,10 +39,10 @@
           </fieldset>
           <button class="popup__btn-save button" type="submit">Сохранить</button>
         </form>
-        <button class="popup__btn-exit button" type="button"></button>
+        <button class="popup__btn-exit popup__btn-exit_edit button" type="button"></button>
       </div>
     </section>
-    <section class="popup popup_add">
+    <section class="popup popup_type_card-add">
       <div class="popup__container popup__container_add">
         <h2 class="popup__title">Новое место</h2>
         <form name="form-submit">
@@ -55,7 +55,7 @@
         <button class="popup__btn-exit popup__btn-exit_add button" type="button"></button>
       </div>
     </section>
-    <section class="popup popup_img-open">
+    <section class="popup popup_type_img">
       <div class="popup__container-img">
         <figure class="popup__figure">
           <img src="#" alt="" class="popup__img">
@@ -75,6 +75,7 @@
       </div>
     </article>
   </template>
+  <script src="./scripts/list.js"></script>
   <script src="./scripts/script.js"></script>
 </body>
 </html>
