@@ -1,3 +1,4 @@
+const formProfile = document.querySelector ('.popup__container_edit');
 const popupProfile = document.querySelector ('.popup_type_profile');
 const popupAdd = document.querySelector ('.popup_type_card-add');
 const openProfileEdit = document.querySelector ('.profile__btn-edit');
@@ -5,7 +6,6 @@ const exitProfilEdit = document.querySelector ('.popup__btn-exit_edit')
 const exitPopupAdd = document.querySelector ('.popup__btn-exit_add')
 const nameProfile = document.querySelector ('.profile__name');
 const work = document.querySelector ('.profile__work')
-const form = document.querySelector ('.popup__container_edit');
 const formAdd = document.querySelector ('.popup__container_add');
 const nameInput = document.querySelector ('.popup__input_type_name');
 const workInput =  document.querySelector ('.popup__input_type_work');
@@ -17,34 +17,24 @@ const namePlaceInput = document.querySelector ('.popup__input_type_place-name');
 const urlImgInput = document.querySelector ('.popup__input_type_url-img');
 const popupImg = document.querySelector ('.popup_type_img');
 const exitPopupImg = document.querySelector('.popup__btn-exit_img');
-const cardImg = document.querySelector('.card__img');
 //Нужно упорядочить переменные
 
 // Popup профиля
-const popupVisible = () => {
-  popup.classList.add('popup_visible');
+const popupVisible = (item) => {
+  item.classList.add('popup_visible');
   nameInput.value = nameProfile.textContent;
   workInput.value = work.textContent;
 };
 
-const popupExit = () => {
-  popup.classList.remove('popup_visible')
+const popupExit = (item) => {
+  item.classList.remove('popup_visible')
 };
 
 const formSubmitHandler = (evt) => {
   evt.preventDefault();
-  nameProfile.textContent = `${nameInput.value}`;
-  work.textContent = `${workInput.value}`;
-  popupExit();
-};
-
-// Popup карточек
-const popupAddVisible = () => {
-  popupAdd.classList.add('popup_visible');
-};
-
-const popupAddExit = () => {
-  popupAdd.classList.remove('popup_visible');
+  nameProfile.textContent = nameInput.value;
+  work.textContent = workInput.value;
+  popupExit(popupProfile);
 };
 
 const createCard = (element) => {
@@ -73,7 +63,7 @@ const inputSubmitPhoto = (evt) => {
   initialCards.unshift({name: namePlaceInput.value, link: urlImgInput.value});
   const element = initialCards[0];
   createCard(element);
-  popupAddExit();
+  popupExit(popupAdd);
 };
 
 //попап с оригиналом картинки
@@ -85,16 +75,11 @@ const  popupImgVisible = (evt) => {
   document.querySelector('.popup__figcaption').textContent = evt.target.alt;
 };
 
-//закртытие попап с картинкой
-const  popupImgExit = () => {
-  popupImg.classList.remove('popup_visible');
-}
-
 // Вызовы функций
-form.addEventListener('submit', formSubmitHandler);
-openProfileEdit.addEventListener ('click', popupVisible);
-exitProfilEdit.addEventListener ('click', popupExit);
-btnAdd.addEventListener ('click', popupAddVisible);
-exitPopupAdd.addEventListener ('click', popupAddExit);
+formProfile.addEventListener('submit', formSubmitHandler);
 formAdd.addEventListener ('submit', inputSubmitPhoto);
-exitPopupImg.addEventListener ('click', popupImgExit);
+openProfileEdit.addEventListener ('click', () => {popupVisible(popupProfile)});
+btnAdd.addEventListener ('click', () => {popupVisible(popupAdd)});
+exitProfilEdit.addEventListener ('click', () => {popupExit(popupProfile)});
+exitPopupAdd.addEventListener ('click', () => {popupExit(popupAdd)});
+exitPopupImg.addEventListener ('click', () => {popupExit(popupImg)});
