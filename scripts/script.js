@@ -19,15 +19,19 @@ const popupImg = document.querySelector ('.popup_type_img');
 const exitPopupImg = document.querySelector('.popup__btn-exit_img');
 //Нужно упорядочить переменные
 
+//Текст в полях ввода
+const popupProfileText = () => {
+  nameInput.value = nameProfile.textContent;
+  workInput.value = work.textContent;
+}
+
 // Popup профиля
 const popupVisible = (item) => {
   item.classList.add('popup_visible');
-  nameInput.value = nameProfile.textContent;
-  workInput.value = work.textContent;
 };
 
 const popupExit = (item) => {
-  item.classList.remove('popup_visible')
+  item.classList.remove('popup_visible');
 };
 
 const formSubmitHandler = (evt) => {
@@ -49,14 +53,14 @@ const createCard = (element) => {
     evt.target.closest('.card').remove();
   });
   addCard.querySelector('.card__img').addEventListener('click', (evt)=>{
-    popupImgVisible(evt)
+    popupImgVisible(evt);
   });
   return addCard
 }
 
 const renderCard = (addCard) => {
-  photo.prepend(addCard)
-}
+  photo.prepend(addCard);
+};
 
 // Базовая загрузка карточек
 initialCards.forEach(item => renderCard(createCard(item)));
@@ -71,8 +75,7 @@ const inputSubmitPhoto = (evt) => {
 
 //попап с оригиналом картинки
 const  popupImgVisible = (evt) => {
-  popupImg.classList.add('popup_visible');
-  const cardTitle = document.querySelector('.card__title');
+  popupVisible(popupImg);
   document.querySelector('.popup__img').src = evt.target.src;
   document.querySelector('.popup__img').alt = evt.target.alt;
   document.querySelector('.popup__figcaption').textContent = evt.target.alt;
@@ -81,7 +84,7 @@ const  popupImgVisible = (evt) => {
 // Вызовы функций
 formProfile.addEventListener('submit', formSubmitHandler);
 formAdd.addEventListener ('submit', inputSubmitPhoto);
-openProfileEdit.addEventListener ('click', () => {popupVisible(popupProfile)});
+openProfileEdit.addEventListener ('click', () => {popupVisible(popupProfile), popupProfileText()});
 btnAdd.addEventListener ('click', () => {popupVisible(popupAdd)});
 exitProfilEdit.addEventListener ('click', () => {popupExit(popupProfile)});
 exitPopupAdd.addEventListener ('click', () => {popupExit(popupAdd)});
