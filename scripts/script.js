@@ -17,7 +17,6 @@ const namePlaceInput = document.querySelector ('.popup__input_type_place-name');
 const urlImgInput = document.querySelector ('.popup__input_type_url-img');
 const popupImg = document.querySelector ('.popup_type_img');
 const exitPopupImg = document.querySelector('.popup__btn-exit_img');
-//Нужно упорядочить переменные
 
 //Текст в полях ввода
 const popupProfileText = () => {
@@ -25,11 +24,29 @@ const popupProfileText = () => {
   workInput.value = work.textContent;
 }
 
-// Popup профиля
+//Закрытие popup по клавише esc
+const popupExitEsc = (evt) => {
+  if (evt.key === 'Escape') {
+    popupExit(popupProfile);
+    popupExit(popupAdd);
+    popupExit(popupImg);
+  };
+};
+
+//Закрытие popup по клику на оверлей
+const popupExitClick = (evt) => {
+    if (evt.target.classList.contains("popup_visible")) {
+      popupExit(popupProfile);
+      popupExit(popupAdd);
+      popupExit(popupImg);
+    }
+  };
+
+// Popup видимый
 const popupVisible = (item) => {
   item.classList.add('popup_visible');
 };
-
+// Popup невидимый
 const popupExit = (item) => {
   item.classList.remove('popup_visible');
 };
@@ -81,7 +98,6 @@ const  popupImgVisible = (evt) => {
   document.querySelector('.popup__figcaption').textContent = evt.target.alt;
 };
 
-// Вызовы функций
 formProfile.addEventListener('submit', formSubmitHandler);
 formAdd.addEventListener ('submit', inputSubmitPhoto);
 openProfileEdit.addEventListener ('click', () => {popupVisible(popupProfile), popupProfileText()});
@@ -89,3 +105,5 @@ btnAdd.addEventListener ('click', () => {popupVisible(popupAdd)});
 exitProfilEdit.addEventListener ('click', () => {popupExit(popupProfile)});
 exitPopupAdd.addEventListener ('click', () => {popupExit(popupAdd)});
 exitPopupImg.addEventListener ('click', () => {popupExit(popupImg)});
+document.addEventListener('keydown', popupExitEsc);
+document.addEventListener('click', popupExitClick);
