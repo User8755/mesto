@@ -8,6 +8,7 @@
 @import url(../blocks/popup/__btn-save/popup__btn-save-disable.css);
 @import url(../blocks/popup/__input/popup__input_type_error.css);
 @import url(../blocks/popup/__span/popup__span.css);
+@import url(../blocks/main/main.css);
 /* Блок header */
 @import url(../blocks/header/header.css);
 @import url(../blocks/header/__logo/header__logo.css);
@@ -45,3 +46,4 @@
 @import url(../blocks/popup/__figcaption/popup__figcaption.css);
 @import url(../blocks/popup/__figure/popup__figure.css);
 @import url(../blocks/popup/__img/popup__img.css);
+@import url(../blocks/popup/_type/popup_type_img.css);
