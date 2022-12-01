@@ -1,5 +1,5 @@
 const selectors = {
-  formElement: '.popup__form',
+  formElement: '.form',
   inputElement: '.popup__input',
   submitButtonSelector: '.popup__btn-save',
   inputErrorClass: 'popup__input_type_error',
@@ -9,7 +9,6 @@ const selectors = {
 
 const showInputErr = (formElement, inputElement, errorText, selectors) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  console.log(errorElement)
   inputElement.classList.add(selectors.inputErrorClass);
   errorElement.textContent = errorText;
   errorElement.classList.add(selectors.errorClass);
