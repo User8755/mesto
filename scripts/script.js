@@ -20,6 +20,7 @@ const exitPopupImg = document.querySelector('.popup__btn-exit_img');
 const clearInput =  document.querySelector ('.popup__input');
 const popupImgPreview = document.querySelector('.popup__img');
 const popupFigcaption = document.querySelector('.popup__figcaption');
+const btnSave = popupAdd.querySelector ('.popup__btn-save');
 
 
 
@@ -55,7 +56,7 @@ const exitPopup = (item) => {
   document.removeEventListener('keydown', exitPopupEsc);
 };
 
-const formSubmitHandler = (evt) => {
+const submitFormHandle = (evt) => {
   evt.preventDefault();
   nameProfile.textContent = nameInput.value;
   work.textContent = workInput.value;
@@ -88,7 +89,7 @@ const renderCard = (addCard) => {
 initialCards.forEach(item => renderCard(createCard(item)));
 
 // Добавление карточек
-const SubmitInputtPhoto = (evt) => {
+const submitInputtPhoto = (evt) => {
   evt.preventDefault();
   const input = {name: namePlaceInput.value, link: urlImgInput.value};
   renderCard(createCard(input));
@@ -97,10 +98,10 @@ const SubmitInputtPhoto = (evt) => {
 
 //попап с оригиналом картинки
 const  visiblePopupImg = (evt) => {
-  visiblePopup(popupImg);
   popupImgPreview.src = evt.target.src;
   popupImgPreview.alt = evt.target.alt;
   popupFigcaption.textContent = evt.target.alt;
+  visiblePopup(popupImg);
 };
 
 const clearInputPopup = () => {
@@ -108,13 +109,12 @@ const clearInputPopup = () => {
   urlImgInput.value = '';
 };
 
-namePlaceInput.value = '';
-urlImgInput.value = '';
-formProfile.addEventListener('submit', formSubmitHandler);
-formAdd.addEventListener ('submit', SubmitInputtPhoto);
+
+formProfile.addEventListener('submit', submitFormHandle);
+formAdd.addEventListener ('submit', submitInputtPhoto);
 btnOpenProfileEdit.addEventListener ('click', () => {visiblePopup(popupProfile), checkProfileText ()});
-btnAdd.addEventListener ('click', () => {visiblePopup(popupAdd),  clearInputPopup()});
+btnAdd.addEventListener ('click', () => {disabledButton(btnSave), visiblePopup(popupAdd),  clearInputPopup()});
 btnExitProfilEdit.addEventListener ('click', () => {exitPopup(popupProfile)});
 btnExitPopupAdd.addEventListener ('click', () => {exitPopup(popupAdd)});
 exitPopupImg.addEventListener ('click', () => {exitPopup(popupImg)});
-document.addEventListener('click', clickPopupExit);
+document.addEventListener('mousedown', clickPopupExit);

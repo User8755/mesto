@@ -43,6 +43,11 @@ const toggleButtonState = (inputList, btnElement) => {
   }
 };
 
+const disabledButton = (btnElement) => {
+  btnElement.setAttribute('disabled', 'true');
+}
+
+
 const setEventListeners = (formElement, selectors) => {
   const inputList = Array.from(formElement.querySelectorAll(selectors.inputElement));
   const btnElement = formElement.querySelector(selectors.submitButtonSelector);
