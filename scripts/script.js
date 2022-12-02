@@ -17,7 +17,7 @@ const namePlaceInput = document.querySelector ('.popup__input_type_place-name');
 const urlImgInput = document.querySelector ('.popup__input_type_url-img');
 const popupImg = document.querySelector ('.popup_type_img');
 const exitPopupImg = document.querySelector('.popup__btn-exit_img');
-const clearInput =  document.querySelector ('.popup__input');
+const forms =  document.forms.add;
 const popupImgPreview = document.querySelector('.popup__img');
 const popupFigcaption = document.querySelector('.popup__figcaption');
 const btnSave = popupAdd.querySelector ('.popup__btn-save');
@@ -105,15 +105,14 @@ const  visiblePopupImg = (evt) => {
 };
 
 const clearInputPopup = () => {
-  namePlaceInput.value = '';
-  urlImgInput.value = '';
+  forms.reset()
 };
 
 
 formProfile.addEventListener('submit', submitFormHandle);
 formAdd.addEventListener ('submit', submitInputtPhoto);
 btnOpenProfileEdit.addEventListener ('click', () => {visiblePopup(popupProfile), checkProfileText ()});
-btnAdd.addEventListener ('click', () => {disabledButton(btnSave), visiblePopup(popupAdd),  clearInputPopup()});
+btnAdd.addEventListener ('click', () => {disabledButton(btnSave), visiblePopup(popupAdd), clearInputPopup()});
 btnExitProfilEdit.addEventListener ('click', () => {exitPopup(popupProfile)});
 btnExitPopupAdd.addEventListener ('click', () => {exitPopup(popupAdd)});
 exitPopupImg.addEventListener ('click', () => {exitPopup(popupImg)});
