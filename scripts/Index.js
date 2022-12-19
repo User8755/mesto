@@ -1,13 +1,7 @@
-import {DefaultCard} from './card.js'
-import FormValidator from './sdsada.js'
-
-const selectors = {
-  formElement: '.form',
-  inputElement: '.popup__input',
-  submitButtonSelector: '.popup__btn-save',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__input-error_active'
-};
+import {initialCards} from './list.js'
+import Card from './Card.js'
+import {selectors} from './selectors.js';
+import FormValidator from './FormValidator.js'
 
 const formProfile = document.querySelector ('.popup__container_edit');
 const popupProfile = document.querySelector ('.popup_type_profile');
@@ -29,7 +23,6 @@ const exitPopupImg = document.querySelector('.popup__btn-exit_img');
 const forms =  document.forms.add;
 const popupImgPreview = document.querySelector('.popup__img');
 const popupFigcaption = document.querySelector('.popup__figcaption');
-const btnSave = popupAdd.querySelector ('.popup__btn-save');
 
 //Текст в полях ввода
 const checkProfileText  = () => {
@@ -81,7 +74,7 @@ const  visiblePopupImg = (evt) => {
 
 //Добавление карточек в DOM
 const addCard = (item) => {
-  const createCard = new DefaultCard(item.name, item.link,'.photo-card');
+  const createCard = new Card(item.name, item.link,'.photo-card');
   const cardElement = createCard.addData(visiblePopupImg);
   photo.prepend(cardElement);
 }

@@ -3,7 +3,7 @@
   height: 24px;
   background-image: url(../../../images/EditButton.svg);
   background-repeat: no-repeat;
-  background-position: 50%;
+  background-position: center;
   background-color: #000;
   background-size: 10px;
   border: 1px solid #fff;

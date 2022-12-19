@@ -48,8 +48,6 @@ export default class FormValidator {
     }
   };
 
- 
-
   _setEventListeners() {
     this._inputList = Array.from(this._formElement.querySelectorAll(this._selectors.inputElement));
     this._btnElement = this._formElement.querySelector(this._selectors.submitButtonSelector);
