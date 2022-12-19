@@ -1,4 +1,13 @@
 import {DefaultCard} from './card.js'
+import FormValidator from './sdsada.js'
+
+const selectors = {
+  formElement: '.form',
+  inputElement: '.popup__input',
+  submitButtonSelector: '.popup__btn-save',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input-error_active'
+};
 
 const formProfile = document.querySelector ('.popup__container_edit');
 const popupProfile = document.querySelector ('.popup_type_profile');
@@ -93,11 +102,15 @@ const clearInputPopup = () => {
   forms.reset()
 };
 
+const validProfile = new FormValidator(popupProfile, selectors);
+const validNewCard = new FormValidator(popupAdd, selectors);
+
 formProfile.addEventListener('submit', submitFormHandle);
 formAdd.addEventListener ('submit', submitInputtPhoto);
-btnOpenProfileEdit.addEventListener ('click', () => {visiblePopup(popupProfile), checkProfileText ()});
-btnAdd.addEventListener ('click', () => {clearInputPopup(), disabledButton(btnSave), visiblePopup(popupAdd) });
+btnOpenProfileEdit.addEventListener ('click', () => {visiblePopup(popupProfile), checkProfileText (), validProfile.enableValidation()});
+btnAdd.addEventListener ('click', () => {clearInputPopup(), visiblePopup(popupAdd), validNewCard.enableValidation()});
 btnExitProfilEdit.addEventListener ('click', () => {exitPopup(popupProfile)});
 btnExitPopupAdd.addEventListener ('click', () => {exitPopup(popupAdd)});
 exitPopupImg.addEventListener ('click', () => {exitPopup(popupImg)});
 document.addEventListener('mousedown', clickPopupExit);
+

@@ -13,6 +13,7 @@ _getCard() {
     return dataCard
 };
 
+
 _likeCard() {
   this._like = this._element.querySelector('.card__like');
   this._like.addEventListener('click', ()=>{
