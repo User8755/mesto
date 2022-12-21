@@ -1,11 +1,10 @@
 export default class Card {
-	constructor(name, link, templateSelector, handleOpenPopupWithImage) {
+  constructor(name, link, templateSelector, handleOpenPopupWithImage) {
     this._templateSelector = templateSelector;
     this._link = link;
     this._name = name;
     this._handleOpenPopupWithImage = handleOpenPopupWithImage;
-	};
-//Почему-то на гит хаб уезжают отступы
+  };
 
 _getCard() {
   const dataCard = document
