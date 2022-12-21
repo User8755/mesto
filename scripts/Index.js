@@ -1,7 +1,7 @@
 import {initialCards} from './list.js'
-import Card from './Card.js'
+import Card from './card.js'
 import {selectors} from './selectors.js';
-import FormValidator from './FormValidator.js'
+import FormValidator from './formValidator.js'
 
 const formProfile = document.querySelector ('.popup__container_edit');
 const popupProfile = document.querySelector ('.popup_type_profile');
@@ -31,33 +31,33 @@ const checkProfileText  = () => {
 }
 
 //Закрытие popup по клавише esc
-const exitPopupEsc = (evt) => {
+const handleCloseByEsc = (evt) => {
   if (evt.key === 'Escape') {
-    const closePopup = document.querySelector('.popup_visible');
-    exitPopup(closePopup);
+    const popupClose = document.querySelector('.popup_visible');
+    exitPopup(popupClose);
   };
 };
 
 //Закрытие popup по клику на оверлей
-const clickPopupExit = (evt) => {
+const handleCloseByOverlay = (evt) => {
    if (evt.target.classList.contains("popup_visible")) {
     exitPopup(evt.target);
     }
   };
 
 // Popup видимый
-const visiblePopup = (item) => {
-  item.classList.add('popup_visible');
-  document.addEventListener('keydown', exitPopupEsc);
+const visiblePopup = (popup) => {
+  popup.classList.add('popup_visible');
+  document.addEventListener('keydown', handleCloseByEsc);
 };
 // Popup невидимый
-const exitPopup = (item) => {
-  item.classList.remove('popup_visible');
-  document.removeEventListener('keydown', exitPopupEsc);
+const exitPopup = (popup) => {
+  popup.classList.remove('popup_visible');
+  document.removeEventListener('keydown', handleCloseByEsc);
 };
 
 //Поля поапа редактирвоания профиля
-const submitFormHandle = (evt) => {
+const submitFormProfile = (evt) => {
   evt.preventDefault();
   nameProfile.textContent = nameInput.value;
   work.textContent = workInput.value;
@@ -65,7 +65,7 @@ const submitFormHandle = (evt) => {
 };
 
 //попап с оригиналом картинки
-const  visiblePopupImg = (evt) => {
+const  handleOpenPopupWithImage = (evt) => {
   popupImgPreview.src = evt.target.src;
   popupImgPreview.alt = evt.target.alt;
   popupFigcaption.textContent = evt.target.alt;
@@ -74,19 +74,24 @@ const  visiblePopupImg = (evt) => {
 
 //Добавление карточек в DOM
 const addCard = (item) => {
-  const createCard = new Card(item.name, item.link,'.photo-card');
-  const cardElement = createCard.addData(visiblePopupImg);
+  const cardCreate = new Card(item.name, item.link,'.photo-card', handleOpenPopupWithImage);
+  const cardElement = cardCreate.generateCard();
+
+  return cardElement
+};
+
+const renderCard = (cardElement) => {
   photo.prepend(cardElement);
-}
+}; 
 
 //Базовый список картинок
-initialCards.forEach((item) => {addCard(item)});
+initialCards.forEach((item) => {renderCard(addCard(item))});
 
 // Добавление карточек
-const submitInputtPhoto = (evt) => {
+const submitInputPhoto = (evt) => {
   evt.preventDefault();
   const input = {name: namePlaceInput.value, link: urlImgInput.value};
-  addCard(input);
+  renderCard(addCard(input));
   exitPopup(popupAdd);
 };
 
@@ -95,15 +100,18 @@ const clearInputPopup = () => {
   forms.reset()
 };
 
+//Создание экземпляра класса валидации для popup
 const validProfile = new FormValidator(popupProfile, selectors);
 const validNewCard = new FormValidator(popupAdd, selectors);
 
-formProfile.addEventListener('submit', submitFormHandle);
-formAdd.addEventListener ('submit', submitInputtPhoto);
-btnOpenProfileEdit.addEventListener ('click', () => {visiblePopup(popupProfile), checkProfileText (), validProfile.enableValidation()});
-btnAdd.addEventListener ('click', () => {clearInputPopup(), visiblePopup(popupAdd), validNewCard.enableValidation()});
-btnExitProfilEdit.addEventListener ('click', () => {exitPopup(popupProfile)});
-btnExitPopupAdd.addEventListener ('click', () => {exitPopup(popupAdd)});
-exitPopupImg.addEventListener ('click', () => {exitPopup(popupImg)});
-document.addEventListener('mousedown', clickPopupExit);
+validNewCard.enableValidation();
+validProfile.enableValidation();
 
+formProfile.addEventListener('submit', submitFormProfile);
+formAdd.addEventListener('submit', submitInputPhoto);
+btnOpenProfileEdit.addEventListener('click', () => {visiblePopup(popupProfile), checkProfileText(), validProfile.resetValidation()});
+btnAdd.addEventListener('click', () => {clearInputPopup(), visiblePopup(popupAdd), validNewCard.resetValidation()});
+btnExitProfilEdit.addEventListener('click', () => {exitPopup(popupProfile)});
+btnExitPopupAdd.addEventListener('click', () => {exitPopup(popupAdd)});
+exitPopupImg.addEventListener('click', () => {exitPopup(popupImg)});
+document.addEventListener('mousedown', handleCloseByOverlay);
