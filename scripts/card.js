@@ -5,6 +5,7 @@ export default class Card {
     this._name = name;
     this._handleOpenPopupWithImage = handleOpenPopupWithImage;
 	};
+//Почему-то на гит хаб уезжают отступы
 
 _getCard() {
   const dataCard = document
