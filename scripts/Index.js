@@ -104,6 +104,7 @@ const clearInputPopup = () => {
 const validProfile = new FormValidator(popupProfile, selectors);
 const validNewCard = new FormValidator(popupAdd, selectors);
 
+//Вызовы
 validNewCard.enableValidation();
 validProfile.enableValidation();
 

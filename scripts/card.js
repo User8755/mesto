@@ -30,7 +30,7 @@ _setEventListeners() {
   this._element.querySelector('.card__like').addEventListener('click', this._likeCard);
   this._element.querySelector('.card__btn-delete').addEventListener('click', () => this._deleteCard());
   this._cardImg.addEventListener('click', this._handleOpenPopupWithImage);
-}
+};
 
 generateCard() {
   this._element = this._getCard();
