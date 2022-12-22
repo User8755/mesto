@@ -1,7 +1,7 @@
 import {initialCards} from './list.js'
 import Card from './Card.js'
 import {selectors} from './selectors.js';
-import FormValidator from './formValidator.js'
+import FormValidator from './FormValidator.js'
 
 const formProfile = document.querySelector ('.popup__container_edit');
 const popupProfile = document.querySelector ('.popup_type_profile');
