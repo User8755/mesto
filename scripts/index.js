@@ -1,5 +1,5 @@
 import {initialCards} from './list.js'
-import Card from './card.js'
+import Card from './Card.js'
 import {selectors} from './selectors.js';
 import FormValidator from './formValidator.js'
 

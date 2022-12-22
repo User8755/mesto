@@ -14,7 +14,7 @@ _getCard() {
     .cloneNode(true)
 
     return dataCard
-};
+}
 
 _likeCard() {
   this.classList.toggle('card__like_active');
