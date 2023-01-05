@@ -12,19 +12,23 @@ import {initialCards,
   btnAdd,
   namePlaceInput,
   urlImgInput,
+  dataInput,
   popupImg,
-  exitPopupImg,
   forms,
-  popupImgPreview,
   popupFigcaption} from './list.js'
 import Card from './Card.js'
 import {selectors} from './selectors.js';
 import FormValidator from './FormValidator.js'
 import Section from './Section.js';
 import Popup from './Popup.js';
+import PopupWithImage from './PopupWithImage.js'
 
-
-
+const popupImgPreview = (name, link) => { 
+  const popupImage = new PopupWithImage(popupImg, dataInput, popupFigcaption);
+  popupImage.setEventListeners();
+  popupImage.open(name, link);
+  //dataInput.src = ''
+}
 //Текст в полях ввода
 const checkProfileText  = () => {
   nameInput.value = nameProfile.textContent;
@@ -36,18 +40,11 @@ const submitFormProfile = (evt) => {
   evt.preventDefault();
   nameProfile.textContent = nameInput.value;
   work.textContent = workInput.value;
-  openProfile.close();
-};
-
-//попап с оригиналом картинки
-const  handleOpenPopupWithImage = (evt) => {
-  popupImgPreview.src = evt.target.src;
-  popupImgPreview.alt = evt.target.alt;
-  popupFigcaption.textContent = evt.target.alt;
+  openNewProfile.close();
 };
 
 const   renderer = (item) => {
-  const cardCreate = new Card(item.name, item.link,'.photo-card', handleOpenPopupWithImage);
+  const cardCreate = new Card(item.name, item.link,'.photo-card',() => popupImgPreview(item.name, item.link));
   const cardElement = cardCreate.generateCard();
   renderCard.addItem(cardElement)
 }
@@ -62,7 +59,7 @@ const submitInputPhoto = (evt) => {
   evt.preventDefault();
   const inputPlace = {name: namePlaceInput.value, link: urlImgInput.value};
   renderer(inputPlace)
-  openAdd.close();
+  popupNewCard.close();
 };
 
 //Сброс формы
@@ -74,18 +71,18 @@ const clearInputPopup = () => {
 const validProfile = new FormValidator(popupProfile, selectors);
 const validNewCard = new FormValidator(popupAdd, selectors);
 
-const openProfile = new Popup(popupProfile);
-const openAdd = new Popup(popupAdd);
+const openNewProfile = new Popup(popupProfile);
+const popupNewCard = new Popup(popupAdd);
 
-openProfile.setEventListeners();
-openAdd.setEventListeners();
+openNewProfile.setEventListeners();
+popupNewCard.setEventListeners();
 
 renderCard.rendererElement()
 //Вызовы
 validNewCard.enableValidation();
 validProfile.enableValidation();
-btnOpenProfileEdit.addEventListener('click',() => {openProfile.open(), checkProfileText(), validProfile.resetValidation()})
-btnAdd.addEventListener('click', () => {clearInputPopup(), openAdd.open(), validNewCard.resetValidation()});
+btnOpenProfileEdit.addEventListener('click',() => {openNewProfile.open(), checkProfileText(), validProfile.resetValidation()})
+btnAdd.addEventListener('click', () => {clearInputPopup(), popupNewCard.open(), validNewCard.resetValidation()});
 
 formProfile.addEventListener('submit', submitFormProfile);
 formAdd.addEventListener('submit', submitInputPhoto);
