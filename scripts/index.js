@@ -1,50 +1,45 @@
-import {initialCards,
-  formProfile,
-  popupProfile,
-  popupAdd,
-  btnOpenProfileEdit,
-  nameProfile,
-  work,
-  formAdd,
-  nameInput,
-  workInput,
-  photo,
-  btnAdd,
-  namePlaceInput,
-  urlImgInput,
-  dataInput,
-  popupImg,
-  forms,
-  popupFigcaption} from './list.js'
-import Card from './Card.js'
-import {selectors} from './selectors.js';
-import FormValidator from './FormValidator.js'
-import Section from './Section.js';
+import Card from './Card.js';
+import FormValidator from './FormValidator.js';
+import {
+  btnAdd, btnOpenProfileEdit, dataInput, initialCards, nameInput, namePlaceInput, nameProfile, photo, popupAdd, popupFigcaption, popupImg, popupProfile, urlImgInput, work, workInput
+} from './list.js';
 import Popup from './Popup.js';
-import PopupWithImage from './PopupWithImage.js'
+import PopupWithForm from './PopupWithForm.js';
+import PopupWithImage from './PopupWithImage.js';
+import Section from './Section.js';
+import { selectors } from './selectors.js';
+import UserInfo from './UserInfo.js';
+
+
+
 
 const popupImgPreview = (name, link) => { 
   const popupImage = new PopupWithImage(popupImg, dataInput, popupFigcaption);
   popupImage.setEventListeners();
   popupImage.open(name, link);
-  //dataInput.src = ''
 }
 //Текст в полях ввода
-const checkProfileText  = () => {
-  nameInput.value = nameProfile.textContent;
-  workInput.value = work.textContent;
-};
+//const checkProfileText  = () => {
+  //nameInput.value = nameProfile.textContent;
+  //workInput.value = work.textContent;
+//};
+//checkProfileText()
+//const submitFormProfile = (evt) => {
+ // evt.preventDefault();
+  //nameProfile.textContent = nameInput.value;
+ // work.textContent = workInput.value;
+ // openNewProfile.close();
+//};
 
-//Поля поапа редактирвоания профиля
-const submitFormProfile = (evt) => {
-  evt.preventDefault();
-  nameProfile.textContent = nameInput.value;
-  work.textContent = workInput.value;
-  openNewProfile.close();
+// Добавление карточек
+const submitInputPhoto = () => {
+  const inputPlace = {name: namePlaceInput.value, link: urlImgInput.value};
+  renderer(inputPlace)
+  //popupNewCard.close();
 };
 
 const   renderer = (item) => {
-  const cardCreate = new Card(item.name, item.link,'.photo-card',() => popupImgPreview(item.name, item.link));
+  const cardCreate = new Card(item.name, item.link,'.photo-card', () => popupImgPreview(item.name, item.link));
   const cardElement = cardCreate.generateCard();
   renderCard.addItem(cardElement)
 }
@@ -53,36 +48,44 @@ const renderCard = new Section({
   items: initialCards,
   renderer}, photo);
 
+const userInfo = new UserInfo(nameInput, workInput);
 
-// Добавление карточек
-const submitInputPhoto = (evt) => {
-  evt.preventDefault();
-  const inputPlace = {name: namePlaceInput.value, link: urlImgInput.value};
-  renderer(inputPlace)
-  popupNewCard.close();
-};
-
-//Сброс формы
-const clearInputPopup = () => {
-  forms.reset()
-};
-
-//Создание экземпляра класса валидации для popup
 const validProfile = new FormValidator(popupProfile, selectors);
 const validNewCard = new FormValidator(popupAdd, selectors);
 
 const openNewProfile = new Popup(popupProfile);
 const popupNewCard = new Popup(popupAdd);
 
+const popupWithFormAdd = new PopupWithForm({
+  popup: popupAdd, 
+  submit: (item) => {userInfo.setUserInfo(item)}
+});
+
+const popupWithFormProfile = new PopupWithForm({
+  popup: popupProfile, 
+  submit: (item) => {userInfo.setUserInfo(item), popupWithFormProfile.close()}
+});
+
+//Вызовы
 openNewProfile.setEventListeners();
 popupNewCard.setEventListeners();
 
-renderCard.rendererElement()
-//Вызовы
+
 validNewCard.enableValidation();
 validProfile.enableValidation();
-btnOpenProfileEdit.addEventListener('click',() => {openNewProfile.open(), checkProfileText(), validProfile.resetValidation()})
-btnAdd.addEventListener('click', () => {clearInputPopup(), popupNewCard.open(), validNewCard.resetValidation()});
 
-formProfile.addEventListener('submit', submitFormProfile);
-formAdd.addEventListener('submit', submitInputPhoto);
+popupWithFormAdd.setEventListeners();
+popupWithFormProfile.setEventListeners();
+
+renderCard.rendererElement();
+
+btnOpenProfileEdit.addEventListener('click',() => {
+  openNewProfile.open(), 
+  validProfile.resetValidation(),
+  userInfo.setUserInfo(userInfo.getUserInfo())
+  });
+
+btnAdd.addEventListener('click', () => {
+  popupNewCard.open(),
+  validNewCard.resetValidation()
+});
