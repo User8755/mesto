@@ -1,11 +1,7 @@
 import './index.css';
 
-import logo from '../images/logo.svg'
-const images = [
-  {name: 'logo', iamge: logo}
-]
 import {
-  btnAdd, btnOpenProfileEdit, dataInput, initialCards, nameInput, namePlaceInput, nameProfile, photo, popupAdd, popupFigcaption, popupImg, popupProfile, urlImgInput, work, workInput
+  btnAdd, btnOpenProfileEdit, initialCards, nameInput, nameProfile, photo, popupAdd, popupImg, popupProfile, work, workInput
 } from '../utils/constlist.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
@@ -15,34 +11,32 @@ import Section from '../components/Section.js';
 import { selectors } from '../utils/selectors.js';
 import UserInfo from '../components/UserInfo.js';
 
-
-
-
-const popupImgPreview = (name, link) => { 
-  const popupImage = new PopupWithImage(popupImg, dataInput, popupFigcaption);
-  popupImage.setEventListeners();
-  popupImage.open(name, link);
-}
 //Текст в полях ввода
 const checkProfileText  = () => {
   nameInput.value = nameProfile.textContent;
   workInput.value = work.textContent;
 };
 
-
 // Добавление карточек
-const submitInputPhoto = () => {
-  const inputPlace = {name: namePlaceInput.value, link: urlImgInput.value};
+const submitInputPhoto = (item) => {
+  const inputPlace = {name: item.placename, link: item.urlimg};
+  console.log(item)
   renderer(inputPlace)
+};
+
+const popupImage = new PopupWithImage(popupImg);
+
+const popupImgPreview = (name, link) => { 
+  popupImage.open(name, link);
 };
 
 const   renderer = (item) => {
   const cardCreate = new Card(item.name, item.link,'.photo-card', () => popupImgPreview(item.name, item.link));
   const cardElement = cardCreate.generateCard();
-  renderCard.addItem(cardElement)
+  cardList.addItem(cardElement)
 }
 
-const renderCard = new Section({
+const cardList = new Section({
   items: initialCards,
   renderer}, photo);
 
@@ -53,7 +47,7 @@ const validNewCard = new FormValidator(popupAdd, selectors);
 
 const popupWithFormAdd = new PopupWithForm({
   popup: popupAdd, 
-  submit: () => {submitInputPhoto(), popupWithFormAdd.close()}
+  submit: (item) => {submitInputPhoto(item), popupWithFormAdd.close()}
 });
 
 const popupWithFormProfile = new PopupWithForm({
@@ -61,17 +55,19 @@ const popupWithFormProfile = new PopupWithForm({
   submit: (item) => {userInfo.setUserInfo(item), popupWithFormProfile.close()}
 });
 
+popupImage.setEventListeners();
+
 validNewCard.enableValidation();
 validProfile.enableValidation();
 
 popupWithFormAdd.setEventListeners();
 popupWithFormProfile.setEventListeners();
 
-renderCard.rendererElement();
+cardList.rendererElement();
 
 btnOpenProfileEdit.addEventListener('click',() => {
   popupWithFormProfile.open(), 
-  validProfile.resetValidation()
+  validProfile.resetValidation(),
   checkProfileText()
   });
 

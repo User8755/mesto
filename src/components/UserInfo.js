@@ -5,12 +5,12 @@ export default class UserInfo {
   };
 
   getUserInfo() {
-    const inputValue = {
+    const userInfo = {
       profilename: this._getInputName.textContent,
       profilework: this._getInputWork.textContent
     };
-    console.log(inputValue)
-    return inputValue
+  
+    return userInfo
   };
 
   setUserInfo(item) {

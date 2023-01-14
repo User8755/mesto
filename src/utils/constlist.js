@@ -40,5 +40,3 @@ export const btnAdd = document.querySelector ('.profile__btn-add');
 export const namePlaceInput = document.querySelector ('.popup__input_type_place-name');
 export const urlImgInput = document.querySelector ('.popup__input_type_url-img');
 export const popupImg = document.querySelector ('.popup_type_img');
-export const dataInput = document.querySelector('.popup__img');
-export const popupFigcaption = document.querySelector('.popup__figcaption');
