@@ -48,7 +48,7 @@ const renderCard = new Section({
   items: initialCards,
   renderer}, photo);
 
-const userInfo = new UserInfo(nameInput, workInput);
+const userInfo = new UserInfo(nameProfile, work);
 
 const validProfile = new FormValidator(popupProfile, selectors);
 const validNewCard = new FormValidator(popupAdd, selectors);
@@ -81,7 +81,7 @@ renderCard.rendererElement();
 
 btnOpenProfileEdit.addEventListener('click',() => {
   openNewProfile.open(), 
-  validProfile.resetValidation(),
+  validProfile.resetValidation()
   userInfo.setUserInfo(userInfo.getUserInfo())
   });
 
