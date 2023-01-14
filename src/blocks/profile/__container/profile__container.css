@@ -11,7 +11,7 @@
 
 @media screen and (max-width: 320px) {
   .profile__container {
-    margin-left: 65px;
+    margin: 0 auto;
     max-width: 217px;
     max-height: 26px;
   }

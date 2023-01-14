@@ -1,13 +1,19 @@
-import Card from './Card.js';
-import FormValidator from './FormValidator.js';
+import './index.css';
+
+import logo from '../images/logo.svg'
+const images = [
+  {name: 'logo', iamge: logo}
+]
 import {
   btnAdd, btnOpenProfileEdit, dataInput, initialCards, nameInput, namePlaceInput, nameProfile, photo, popupAdd, popupFigcaption, popupImg, popupProfile, urlImgInput, work, workInput
-} from './list.js';
-import PopupWithForm from './PopupWithForm.js';
-import PopupWithImage from './PopupWithImage.js';
-import Section from './Section.js';
-import { selectors } from './selectors.js';
-import UserInfo from './UserInfo.js';
+} from '../utils/constlist.js';
+import Card from '../components/Card.js';
+import FormValidator from '../components/FormValidator.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import Section from '../components/Section.js';
+import { selectors } from '../utils/selectors.js';
+import UserInfo from '../components/UserInfo.js';
 
 
 
