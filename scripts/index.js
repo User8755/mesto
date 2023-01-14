@@ -58,7 +58,7 @@ const popupNewCard = new Popup(popupAdd);
 
 const popupWithFormAdd = new PopupWithForm({
   popup: popupAdd, 
-  submit: (item) => {userInfo.setUserInfo(item)}
+  submit: (item) => {submitInputPhoto(), popupWithFormAdd.close()}
 });
 
 const popupWithFormProfile = new PopupWithForm({
