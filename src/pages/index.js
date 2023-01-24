@@ -17,12 +17,7 @@ const checkProfileText  = () => {
   workInput.value = work.textContent;
 };
 
-// Добавление карточек
-const submitInputPhoto = (item) => {
-  const inputPlace = {name: item.placename, link: item.urlimg};
-  console.log(item)
-  renderer(inputPlace)
-};
+
 
 const popupImage = new PopupWithImage(popupImg);
 
@@ -75,3 +70,18 @@ btnAdd.addEventListener('click', () => {
   validNewCard.resetValidation(),
   popupWithFormAdd.open()
 });
+
+
+const api = () => {
+  fetch('https://mesto.nomoreparties.co/v1/cohort-58/cards', {
+  headers: {
+    authorization: '7c6cea5c-eb7c-4e88-9a77-da060e3d6f29'
+  }
+})
+  .then(res => res.json())
+  .then((result) => {
+    return result;
+  });
+}
+
+api
