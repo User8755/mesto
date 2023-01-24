@@ -47,7 +47,7 @@ const validNewCard = new FormValidator(popupAdd, selectors);
 
 const popupWithFormAdd = new PopupWithForm({
   popup: popupAdd, 
-  submit: (item) => {submitInputPhoto(item), popupWithFormAdd.close()}
+  submit: (item) => { (item), popupWithFormAdd.close()}
 });
 
 const popupWithFormProfile = new PopupWithForm({

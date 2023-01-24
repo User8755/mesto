@@ -14,7 +14,6 @@ export default class UserInfo {
   };
 
   setUserInfo(item) {
-    
     this._getInputName.textContent = item.profilename;
     this._getInputWork.textContent = item.profilework;
   };
