@@ -28,3 +28,4 @@ export default class PopupWithForm extends Popup {
     this._form.reset();
   };
 };
+//Исправить
