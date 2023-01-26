@@ -1,31 +1,45 @@
 
 export default class Api {
-  constructor(baseUrl, headers) {
-    this.baseUrl = baseUrl
-    this.headers = headers
+  constructor({ baseUrl, headers }) {
+    this._baseUrl = baseUrl
+    this._headers = headers
   };
 
   getInitialCards() {
-    return fetch('https://mesto.nomoreparties.co/v1/cohort-58/cards', {
-      headers: {authorization: '7c6cea5c-eb7c-4e88-9a77-da060e3d6f29',
-      'Content-Type': 'application/json'}
+    return fetch(`${this._baseUrl}/cards`, {
+      headers: this._headers
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json()
+      .then(res => {
+        if (res.ok) {
+          return res.json()
+        }
+        return Promise.reject(new Error('ошибка загрузки').catch((error) => { console.error(error) }))
       }
-      }
-    )
-    .catch((err) => {console.log(err)})
+      )
+      .catch((error) => { console.log(error) })
   }
 
-getUserInfo() {
-  fetch('https://nomoreparties.co/v1/cohortId/users/me', {
-    headers: {authorization: '7c6cea5c-eb7c-4e88-9a77-da060e3d6f29', 'Content-Type': 'application/json'}
-  })
-  .then(res => {
-    if (res.ok) {
-      return res.json();
-    }
-  });
-}}
+  getUserInfo() {
+    return fetch(`${this._baseUrl}/users/me`, {
+      headers: this._headers
+    })
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        }
+      });
+  };
+
+  updateUserInfo(name, about) {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: name,
+        about: about
+      })
+    })
+    
+  }
+
+}

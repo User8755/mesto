@@ -13,11 +13,12 @@ import Api from '../components/Api.js';
 
 //Текст в полях ввода 
 const checkProfileText = () => {
-  nameInput.value = nameProfile.textContent;
-  workInput.value = work.textContent;
+  nameInput.value = userInfo.getUserInfo().profilename;
+  workInput.value = userInfo.getUserInfo().profilework;
 };
+
 const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-58/cards',
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-58',
   headers: {authorization: '7c6cea5c-eb7c-4e88-9a77-da060e3d6f29',
   'Content-Type': 'application/json'}
 })
@@ -48,7 +49,8 @@ api.getInitialCards().then((res) => {const cardList = new Section(
   },
     photo)
     
-cardList.rendererElement()}
+cardList.rendererElement()
+}
 );
 
 const userInfo = new UserInfo(nameProfile, work);
@@ -60,10 +62,10 @@ const popupWithFormAdd = new PopupWithForm({
   popup: popupAdd,
   submit: (item) => { submitInputPhoto(item), popupWithFormAdd.close() }
 });
-
+//в сабмит передать апи обновления информации на сервере
 const popupWithFormProfile = new PopupWithForm({
   popup: popupProfile,
-  submit: (item) => { userInfo.setUserInfo(item), popupWithFormProfile.close() }
+  submit: (item) => { userInfo.setUserInfo(item), api.updateUserInfo(nameInput.value, workInput.value), popupWithFormProfile.close() }
 });
 
 popupImage.setEventListeners();
@@ -86,3 +88,8 @@ btnAdd.addEventListener('click', () => {
   popupWithFormAdd.open()
 });
 
+api.getUserInfo()
+  .then((res)=>{
+  nameProfile.textContent = res.name,
+  work.textContent = res.about
+})
