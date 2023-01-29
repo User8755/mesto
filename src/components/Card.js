@@ -32,12 +32,13 @@ _setEventListeners() {
   this._cardImg.addEventListener('click', this._handleOpenPopupWithImage);
 };
 
-generateCard() {
+generateCard(like) {
   this._element = this._getCard();
   this._cardImg = this._element.querySelector('.card__img');
   this._cardImg.src = this._link; 
   this._cardImg.alt = this._name; 
   this._element.querySelector('.card__title').textContent = this._name;
+  this._element.querySelector('.card__span').textContent = like;
   this._setEventListeners();
   
   return this._element

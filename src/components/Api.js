@@ -38,8 +38,19 @@ export default class Api {
         name: name,
         about: about
       })
+    });
+  };
+
+  loadImg(name, link) {
+    return fetch(`${this._baseUrl}/cards`, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: name,
+        link: link
+      })
     })
-    
   }
+
 
 }

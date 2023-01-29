@@ -1,0 +1,13 @@
+.popup__container_delete {
+  min-width: 282px;
+  max-height: 181px;
+  background-color: #fff;
+  border-radius: 10px;
+  position: relative;
+}
+
+@media screen and (min-width: 530px) {
+  .popup__container_delete {
+    min-width: 430px;
+  }
+}

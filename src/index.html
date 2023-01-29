@@ -67,6 +67,15 @@
         <button class="popup__btn-exit popup__btn-exit_img button" type="button"></button>
       </div>
     </section>
+    <section class="popup popup_type_delete">
+      <div class="popup__container_delete">
+        <h2 class="popup__title">Вы уверены?</h2>
+        <form name="formDelete" class="form">
+          <button class="popup__btn-delete button">Да</button>
+        </form>
+        <button class="popup__btn-exit button" type="button"></button>
+      </div>
+    </section>
   </div>
   <template class="photo-card">
     <article class="card">
@@ -74,7 +83,10 @@
       <img src="#" alt="" class="card__img">
       <div class="card__description">
         <h3 class="card__title"></h3>
-        <button type="button" class="card__like button"></button>
+        <div class="card__block">
+          <button type="button" class="card__like button"></button>
+          <span class="card__span"></span>
+        </div>
       </div>
     </article>
   </template>

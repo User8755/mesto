@@ -1,6 +1,6 @@
 import './index.css';
 import {
-btnAdd, btnOpenProfileEdit, nameInput, nameProfile, photo, popupAdd, popupImg, popupProfile, work, workInput
+btnAdd, btnOpenProfileEdit, nameInput, nameProfile, photo, popupAdd, popupImg, popupProfile, work, workInput, namePlaceInput, urlImgInput, popupDelete
 } from '../utils/constlist.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
@@ -25,7 +25,7 @@ const api = new Api({
 
 // Добавление карточек 
 const submitInputPhoto = (item) => {
-  const inputPlace = { name: item.placename, link: item.urlimg };
+  const inputPlace = { name: item.placename, link: item.urlimg, likes: [] };
   photo.prepend(renderer(inputPlace))
 };
 
@@ -37,7 +37,8 @@ const popupImgPreview = (name, link) => {
 
 const renderer = (item) => {
   const cardCreate = new Card(item.name, item.link, '.photo-card', () => popupImgPreview(item.name, item.link));
-  const cardElement = cardCreate.generateCard();
+  const cardElement = cardCreate.generateCard(item.likes.length );
+  console.log(item)
 
   return cardElement
 }
@@ -48,7 +49,6 @@ api.getInitialCards().then((res) => {const cardList = new Section(
     renderer: (item) => {cardList.addItem(renderer(item))}
   },
     photo)
-    
 cardList.rendererElement()
 }
 );
@@ -60,12 +60,16 @@ const validNewCard = new FormValidator(popupAdd, selectors);
 
 const popupWithFormAdd = new PopupWithForm({
   popup: popupAdd,
-  submit: (item) => { submitInputPhoto(item), popupWithFormAdd.close() }
+  submit: (item) => {api.loadImg(namePlaceInput.value, urlImgInput.value),
+    submitInputPhoto(item),
+    popupWithFormAdd.close()}
 });
-//в сабмит передать апи обновления информации на сервере
+
 const popupWithFormProfile = new PopupWithForm({
   popup: popupProfile,
-  submit: (item) => { userInfo.setUserInfo(item), api.updateUserInfo(nameInput.value, workInput.value), popupWithFormProfile.close() }
+  submit: (item) => { userInfo.setUserInfo(item),
+    api.updateUserInfo(nameInput.value, workInput.value),
+    popupWithFormProfile.close()}
 });
 
 popupImage.setEventListeners();
