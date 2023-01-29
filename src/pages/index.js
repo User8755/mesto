@@ -72,6 +72,16 @@ const popupWithFormProfile = new PopupWithForm({
     popupWithFormProfile.close()}
 });
 
+
+const popupWithFormDelete = new PopupWithForm({
+  popup: popupDelete,
+  submit: (item) => { 
+    // popupWithFormDelete.open(),
+    popupWithFormDelete.close()}
+});
+
+popupWithFormDelete.setEventListeners()
+
 popupImage.setEventListeners();
 
 validNewCard.enableValidation();

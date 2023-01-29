@@ -25,10 +25,10 @@ _deleteCard() {
     this._element = null;
 };
 
-
 _setEventListeners() {
   this._element.querySelector('.card__like').addEventListener('click', this._likeCard);
-  this._element.querySelector('.card__btn-delete').addEventListener('click', () => this._deleteCard());
+  //this._element.querySelector('.card__btn-delete').addEventListener('click', () => this._deleteCard());
+  this._element.querySelector('.card__btn-delete').addEventListener('click',() => document.querySelector ('.popup_type_delete').classList.add('popup_visible'));
   this._cardImg.addEventListener('click', this._handleOpenPopupWithImage);
 };
 
