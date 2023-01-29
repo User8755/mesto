@@ -24,6 +24,7 @@ const api = new Api({
 })
 
 // Добавление карточек 
+//Исправить метод
 const submitInputPhoto = (item) => {
   const inputPlace = { name: item.placename, link: item.urlimg, likes: [] };
   photo.prepend(renderer(inputPlace))
@@ -39,7 +40,11 @@ const renderer = (item) => {
   const cardCreate = new Card(item.name, item.link, '.photo-card', () => popupImgPreview(item.name, item.link));
   const cardElement = cardCreate.generateCard(item.likes.length );
   console.log(item)
-
+ if (item.owner._id != "44ed7b7962d6cfb8fdf85daa")
+  {
+    cardElement.querySelector ('.card__btn-delete').classList.add('popup__btn-delete_hiden')
+  }
+  cardElement.addEventListener('click',()=> {api.deleteCards(item._id)})
   return cardElement
 }
 
@@ -50,7 +55,9 @@ api.getInitialCards().then((res) => {const cardList = new Section(
   },
     photo)
 cardList.rendererElement()
+
 }
+
 );
 
 const userInfo = new UserInfo(nameProfile, work);
@@ -75,8 +82,7 @@ const popupWithFormProfile = new PopupWithForm({
 
 const popupWithFormDelete = new PopupWithForm({
   popup: popupDelete,
-  submit: (item) => { 
-    // popupWithFormDelete.open(),
+  submit: () => { 
     popupWithFormDelete.close()}
 });
 
