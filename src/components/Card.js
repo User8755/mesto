@@ -38,7 +38,11 @@ generateCard(item) {
   this._cardImg.src = this._link; 
   this._cardImg.alt = this._name; 
   this._element.querySelector('.card__title').textContent = this._name;
-  this._element.querySelector('.card__span').textContent = item;
+  this._element.querySelector('.card__span').textContent = item.likes.length;
+  if (item.owner._id != "44ed7b7962d6cfb8fdf85daa")
+  {
+    this._element.querySelector ('.card__btn-delete').classList.add('popup__btn-delete_hiden')
+  }
   this._setEventListeners();
   
   return this._element
