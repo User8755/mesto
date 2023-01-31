@@ -1,6 +1,7 @@
 import './index.css';
 import {
-btnAdd, btnOpenProfileEdit, nameInput, nameProfile, photo, popupAdd, popupImg, popupProfile, work, workInput, namePlaceInput, urlImgInput, popupDelete
+btnAdd, btnOpenProfileEdit, nameInput, nameProfile, photo, popupAdd, popupImg, popupProfile,
+work, workInput, namePlaceInput, urlImgInput, popupDelete
 } from '../utils/constlist.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
@@ -26,7 +27,7 @@ const api = new Api({
 // Добавление карточек 
 // Исправить метод
 const submitInputPhoto = (item) => {
-  const inputPlace = { name: item.placename, link: item.urlimg, likes: [] };
+  const inputPlace = { name: item.placename, link: item.urlimg, likes: [], owner:{_id: '44ed7b7962d6cfb8fdf85daa'} };
   photo.prepend(renderer(inputPlace))
 };
 
@@ -37,10 +38,17 @@ const popupImgPreview = (name, link) => {
 };
 
 const renderer = (item) => {
-  const cardCreate = new Card(item.name, item.link, '.photo-card', () => popupImgPreview(item.name, item.link));
-  const cardElement = cardCreate.generateCard(item );
+  const cardCreate = new Card(
+    item.name, item.link,
+    '.photo-card',
+    () => popupImgPreview(item.name, item.link),
+    item,
+    () => popupWithFormDeleting.open()
+    );
+
+  const cardElement = cardCreate.generateCard(item);
   //console.log(item)
-   popupDelete.querySelector('.popup__btn-delete').addEventListener('click',()=> {api.deleteCards(item._id)})
+   //popupDelete.querySelector('.popup__btn-delete').addEventListener('click',()=> {api.deleteCards(item._id)})
   return cardElement
 }
 
@@ -69,19 +77,16 @@ const popupWithFormAdd = new PopupWithForm({
 
 const popupWithFormProfile = new PopupWithForm({
   popup: popupProfile,
-  submit: (item) => { userInfo.setUserInfo(item),
+  submit: (item) => {userInfo.setUserInfo(item),
     api.updateUserInfo(nameInput.value, workInput.value),
     popupWithFormProfile.close()}
 });
 
-
-const popupWithFormDelete = new PopupWithForm({
+const popupWithFormDeleting = new PopupWithForm({
   popup: popupDelete,
-  submit: () => {
-    popupWithFormDelete.close()}
+  submit: () => { 
+    popupWithFormDeleting.close()}
 });
-
-popupWithFormDelete.setEventListeners()
 
 popupImage.setEventListeners();
 
@@ -89,19 +94,26 @@ validNewCard.enableValidation();
 validProfile.enableValidation();
 
 popupWithFormAdd.setEventListeners();
-
 popupWithFormProfile.setEventListeners();
+popupWithFormDeleting.setEventListeners();
 
+//Открытие попап профиля по кнопке
 btnOpenProfileEdit.addEventListener('click', () => {
   popupWithFormProfile.open(),
     validProfile.resetValidation(),
     checkProfileText()
 });
 
+//Открытие попап добаления места по кнопке
 btnAdd.addEventListener('click', () => {
   validNewCard.resetValidation(),
   popupWithFormAdd.open()
 });
+
+//Открытие попап удаления места по кнопке
+// document.querySelector('.popup__btn-delete').addEventListener('click', () => {
+//   console.log(11)
+// });
 
 api.getUserInfo()
   .then((res)=>{
