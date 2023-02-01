@@ -5,6 +5,8 @@
 .button{background-color:#fff;border:none;padding:0;transition:opacity .7s ease}
 .popup__fieldset{border:none;margin:0 36px;padding:0}@media screen and (max-width:530px){.popup__fieldset{margin:0 22px}}
 .popup__btn-save-disable:disabled{background-color:#e5e5e5;border:2px solid #000;color:#000;opacity:.2}
+.popup__container_delete{background-color:#fff;border-radius:10px;max-height:181px;min-width:282px;position:relative}@media screen and (min-width:530px){.popup__container_delete{min-width:430px}}
+.popup__btn-delete{background-color:#000;color:#fff;display:block;font-size:18px;font-weight:400;line-height:22px;margin:38px auto 36px;min-width:85%;padding:18px 125px;text-align:center}
 .popup__input_type_error:invalid{border-bottom-color:red}
 .popup__span{color:red;font-size:12px;font-style:normal;font-weight:400;line-height:15px;margin-top:5px}.popup__span:nth-child(2){position:absolute}
 .main{min-height:65vh}
@@ -23,9 +25,12 @@
 .card__img{cursor:pointer;height:282px;min-height:282px;-o-object-fit:cover;object-fit:cover;-o-object-position:center;object-position:center;width:282px}
 .card__description{display:flex;justify-content:space-between;margin:24px 20px 0 21px;max-width:246px}@media screen and (max-width:320px){.card__description{margin-top:22px}}
 .card__title{font-size:24px;font-style:normal;font-weight:900;line-height:29px;margin:0;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.card__block{align-items:center;display:flex;flex-direction:column}
 .card__like{background-image:url(08462fd91075246b6cc0.svg);background-position:0;background-repeat:no-repeat;min-height:20px;width:22px}.card__like:hover{cursor:pointer;opacity:.6}
+.card__span{font-size:13px;font-style:normal;font-weight:400;line-height:16px;text-align:center}
 .card__like_active{background-image:url(193b59757eed6a07a362.svg);opacity:1}.card__like_active:hover{opacity:1}
 .card__btn-delete{background-color:transparent;background-image:url(823b0cf1b0b7e9cb7cad.svg);background-position:50%;background-repeat:no-repeat;cursor:pointer;height:19px;position:absolute;right:20px;top:20px;width:18px}.card__btn-delete:hover{opacity:.6}
+.popup__btn-delete_hiden{visibility:hidden}
 .footer{margin:0 auto;max-width:880px;padding-top:67px}@media screen and (max-width:1000px){.footer{max-width:67%}}@media screen and (max-width:320px){.footer{margin-left:19px;max-width:320px;padding-top:48px}}
 .footer__copyright{color:#545454;font-size:18px;font-style:normal;font-weight:400;line-height:22px;margin:0 0 60px}@media screen and (max-width:320px){.footer__copyright{font-size:14px;line-height:17px;margin-bottom:38px}}
 .popup{align-items:center;background-color:rgba(0,0,0,.5);bottom:0;display:flex;justify-content:center;left:0;opacity:0;position:fixed;right:0;top:0;transition:visibility .4s,opacity .5s linear;visibility:hidden}
