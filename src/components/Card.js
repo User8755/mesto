@@ -1,11 +1,12 @@
 export default class Card {
-  constructor(name, link, templateSelector, handleOpenPopupWithImage, data, openPopupDel) {
+  constructor(name, link, templateSelector, handleOpenPopupWithImage, data, openPopupDel, del) {
     this._templateSelector = templateSelector;
     this._link = link;
     this._name = name;
     this._handleOpenPopupWithImage = handleOpenPopupWithImage;
     this._data = data;
     this._openPopupDel = openPopupDel;
+    this._del = del
   };
 
 _getCard() {
@@ -22,28 +23,25 @@ _likeCard() {
   this.classList.toggle('card__like_active');
 };
 
-_deleteCard() {
+deleteCard() {
     this._element.closest('.card').remove();
-    //this._element = null;
+    this._element = null;
 };
 
 _setEventListeners() {
   this._element.querySelector('.card__like').addEventListener('click', this._likeCard);
-  this._element.querySelector('.card__btn-delete').addEventListener('click', this._openPopupDel);
-
-  
-
-  // this._element.querySelector('.card__btn-delete').addEventListener('click',() => {
-  //   document.querySelector ('.popup_type_delete').classList.add('popup_visible'), 
-  //   document.querySelector('.popup__btn-delete').addEventListener('click', () => {this._deleteCard()})
-  // });
-  //console.log(this)
   this._cardImg.addEventListener('click', this._handleOpenPopupWithImage);
 };
 
+getCardId() {
+  this._element.querySelector('.card__btn-delete').addEventListener('click',() => {this._openPopupDel(), this.obj =  this._data, console.log(this.obj)})
+  return this.obj
+}
+
 generateCard() {
   this._element = this._getCard();
-  this._cardImg = this._element.querySelector('.card__img');
+  this.
+  _cardImg = this._element.querySelector('.card__img');
   this._cardImg.src = this._link; 
   this._cardImg.alt = this._name; 
   this._element.querySelector('.card__title').textContent = this._name;
@@ -53,6 +51,7 @@ generateCard() {
     this._element.querySelector ('.card__btn-delete').classList.add('popup__btn-delete_hiden')
   }
   this._setEventListeners();
+
   
   return this._element
 };

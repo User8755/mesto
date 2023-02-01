@@ -13,3 +13,4 @@ export const btnAdd = document.querySelector ('.profile__btn-add');
 export const namePlaceInput = document.querySelector ('.popup__input_type_place-name');
 export const urlImgInput = document.querySelector ('.popup__input_type_url-img');
 export const popupImg = document.querySelector ('.popup_type_img');
+export const btnDel = popupDelete.querySelector ('.popup__btn-delete');

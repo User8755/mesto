@@ -1,7 +1,7 @@
 import './index.css';
 import {
 btnAdd, btnOpenProfileEdit, nameInput, nameProfile, photo, popupAdd, popupImg, popupProfile,
-work, workInput, namePlaceInput, urlImgInput, popupDelete
+work, workInput, namePlaceInput, urlImgInput, popupDelete, btnDel
 } from '../utils/constlist.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
@@ -25,7 +25,6 @@ const api = new Api({
 })
 
 // Добавление карточек 
-// Исправить метод
 const submitInputPhoto = (item) => {
   const inputPlace = { name: item.placename, link: item.urlimg, likes: [], owner:{_id: '44ed7b7962d6cfb8fdf85daa'} };
   photo.prepend(renderer(inputPlace))
@@ -39,16 +38,18 @@ const popupImgPreview = (name, link) => {
 
 const renderer = (item) => {
   const cardCreate = new Card(
-    item.name, item.link,
+    item.name,
+    item.link,
     '.photo-card',
     () => popupImgPreview(item.name, item.link),
     item,
-    () => popupWithFormDeleting.open()
+    ()=> popupWithFormDeleting.open(),
+    btnDel.addEventListener('click',() => {api.deleteCards(cardCreate.getCardId()._id), cardCreate.deleteCard() })
     );
 
   const cardElement = cardCreate.generateCard(item);
-  //console.log(item)
-   //popupDelete.querySelector('.popup__btn-delete').addEventListener('click',()=> {api.deleteCards(item._id)})
+  cardCreate.getCardId()
+  
   return cardElement
 }
 
