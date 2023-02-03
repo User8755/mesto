@@ -17,7 +17,7 @@ export default class Api {
       }
       )
       .catch((error) => { console.log(error) })
-  }
+  };
 
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
@@ -49,13 +49,28 @@ export default class Api {
         name: name,
         link: link
       })
-    })
+    });
   };
 
-  deleteCards(cardId) {
-    return fetch(`${this._baseUrl}/cards/${cardId}`, {
+  deleteCards() {
+    return fetch(`${this._baseUrl}/cards/${this._cardId}`, {
       method: 'DELETE',
       headers: this._headers
-  })
-  }
-}
+   });
+  };
+
+  putLike(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+      method: 'PUT',
+      headers: this._headers
+  });
+};
+
+  deleteLike(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+      method: 'DELETE',
+      headers: this._headers
+  });
+};
+
+}// конец файла

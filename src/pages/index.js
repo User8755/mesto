@@ -1,7 +1,7 @@
 import './index.css';
 import {
 btnAdd, btnOpenProfileEdit, nameInput, nameProfile, photo, popupAdd, popupImg, popupProfile,
-work, workInput, namePlaceInput, urlImgInput, popupDelete, btnDel
+work, workInput, namePlaceInput, urlImgInput, popupDelete, btnDel, myId
 } from '../utils/constlist.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
@@ -44,14 +44,11 @@ const renderer = (item) => {
     () => popupImgPreview(item.name, item.link),
     item,
     ()=> popupWithFormDeleting.open(),
-    btnDel.addEventListener('click',() => {api.deleteCards(cardCreate.getCardId()._id), cardCreate.deleteCard() })
-    );
-
-  const cardElement = cardCreate.generateCard(item);
-  cardCreate.getCardId()
-  
-  return cardElement
-}
+    myId,
+    () => api.putLike(cardCreate.getCardId()._id),
+  )
+  return cardCreate.generateCard()
+};
 
 api.getInitialCards()
   .then((res) => {const cardList = new Section(
@@ -60,7 +57,7 @@ api.getInitialCards()
       renderer: (item) => {cardList.addItem(renderer(item))}
     },
       photo)
-  cardList.rendererElement()
+    cardList.rendererElement()
   }
   );
 
@@ -85,10 +82,10 @@ const popupWithFormProfile = new PopupWithForm({
 
 const popupWithFormDeleting = new PopupWithForm({
   popup: popupDelete,
-  submit: () => { 
+  submit: () => {
     popupWithFormDeleting.close()}
+    
 });
-
 popupImage.setEventListeners();
 
 validNewCard.enableValidation();
@@ -110,11 +107,6 @@ btnAdd.addEventListener('click', () => {
   validNewCard.resetValidation(),
   popupWithFormAdd.open()
 });
-
-//Открытие попап удаления места по кнопке
-// document.querySelector('.popup__btn-delete').addEventListener('click', () => {
-//   console.log(11)
-// });
 
 api.getUserInfo()
   .then((res)=>{
