@@ -46,6 +46,7 @@ const renderer = (item) => {
     ()=> popupWithFormDeleting.open(),
     myId,
     () => api.putLike(cardCreate.getCardId()._id),
+    () => api.deleteLike(cardCreate.getCardId()._id)
   )
   return cardCreate.generateCard()
 };
