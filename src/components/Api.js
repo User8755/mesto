@@ -79,7 +79,6 @@ export default class Api {
     if (res.ok) {
       return res.json();
     }
-  
   })
 };
 

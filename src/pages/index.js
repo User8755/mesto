@@ -1,7 +1,8 @@
 import './index.css';
 import {
 btnAdd, btnOpenProfileEdit, nameInput, nameProfile, photo, popupAdd, popupImg, popupProfile,
-work, workInput, namePlaceInput, urlImgInput, popupDelete, btnDel, myId
+work, workInput, namePlaceInput, urlImgInput, popupDelete, btnDel, myId, overlay, avatarEdit, popupAvatar,
+btaAvatarEdit
 } from '../utils/constlist.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
@@ -12,6 +13,16 @@ import { selectors } from '../utils/selectors.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
 
+const ovetlay = (evt) => {if (evt.type == 'mouseover') {
+  evt.target.classList.toggle('profile__avatar-img-visibility')
+}
+if (evt.type == 'mouseout') {
+  evt.target.classList.toggle('profile__avatar-img-visibility')
+}
+}
+
+overlay.addEventListener('mouseover',() => avatarEdit.classList.add('profile__avatar-img-visibility'))
+overlay.addEventListener('mouseout',() => avatarEdit.classList.remove('profile__avatar-img-visibility'))
 //Текст в полях ввода 
 const checkProfileText = () => {
   nameInput.value = userInfo.getUserInfo().profilename;
@@ -66,6 +77,8 @@ const userInfo = new UserInfo(nameProfile, work);
 
 const validProfile = new FormValidator(popupProfile, selectors);
 const validNewCard = new FormValidator(popupAdd, selectors);
+const validAvatar = new FormValidator(popupAvatar, selectors);
+
 
 const popupWithFormAdd = new PopupWithForm({
   popup: popupAdd,
@@ -87,10 +100,20 @@ const popupWithFormDeleting = new PopupWithForm({
     popupWithFormDeleting.close()}
     
 });
+
+const popupWithFormAvatar = new PopupWithForm({
+  popup: popupAvatar,
+  submit: () => {
+    popupWithFormDeleting.close()}
+    
+});
+
 popupImage.setEventListeners();
 
+// Валидация
 validNewCard.enableValidation();
 validProfile.enableValidation();
+validAvatar.enableValidation();
 
 popupWithFormAdd.setEventListeners();
 popupWithFormProfile.setEventListeners();
@@ -108,6 +131,11 @@ btnAdd.addEventListener('click', () => {
   validNewCard.resetValidation(),
   popupWithFormAdd.open()
 });
+
+btaAvatarEdit.addEventListener('click', () => {
+  popupWithFormAvatar.open(),
+  validAvatar.resetValidation()
+})
 
 api.getUserInfo()
   .then((res)=>{

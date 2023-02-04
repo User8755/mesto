@@ -16,7 +16,11 @@
 @import url(../blocks/header/__logo/header__logo.css);
 /* Блок profile */
 @import url(../blocks/profile/profile.css);
-@import url(../blocks/profile/__avatar/profile__avatar.css);
+@import url(../blocks/profile/__avatar/profile__avatar-container.css);
+@import url(../blocks/profile/__btn-edit/profile__btn-edit-avatar.css);
+@import url(../blocks/profile/__avatar/profile__avatar-img-visibility.css);
+@import url(../blocks/profile/__overlay/profile__overlay.css);
+@import url(../blocks/profile/__avatar/profile__avatar-img.css);
 @import url(../blocks/profile/__name/profile__name.css);
 @import url(../blocks/profile/__work/profile__work.css);
 @import url(../blocks/profile/__info/profile__info.css);
@@ -52,3 +56,5 @@
 @import url(../blocks/popup/__figure/popup__figure.css);
 @import url(../blocks/popup/__img/popup__img.css);
 @import url(../blocks/popup/_type/popup_type_img.css);
+@import url(../blocks/popup/__container/_avatar/popup__container_avatar.css);
+@import url(../blocks/input/input-url-avtar-error.css);

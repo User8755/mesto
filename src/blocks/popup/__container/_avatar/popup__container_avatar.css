@@ -1,0 +1,7 @@
+.popup__container_avatar {
+  width: 430px;
+  height: 272px;
+  background-color: #fff;
+  border-radius: 10px;
+  position: relative;
+}

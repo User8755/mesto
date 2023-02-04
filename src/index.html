@@ -12,7 +12,13 @@
     </header>
     <main class="main">
       <section class="profile">
-        <img src="<%=require('./images/avatar.jpg')%>" alt="Аватар профиля" class="profile__avatar">
+        <div class="profile__avatar-container">
+          <img src="<%=require('./images/avatar.jpg')%>" alt="Аватар профиля" class="profile__avatar-img">
+          
+          <div class="profile__overlay">
+            <button class="profile__btn-edit-avatar"></button>
+          </div>
+        </div>
         <div class="profile__info">
           <div class="profile__container">
             <h1 class="profile__name"></h1>
@@ -72,6 +78,19 @@
         <h2 class="popup__title">Вы уверены?</h2>
         <form name="formDelete" class="form">
           <button class="popup__btn-delete button" type="submit">Да</button>
+        </form>
+        <button class="popup__btn-exit button" type="button"></button>
+      </div>
+    </section>
+    <section class="popup popup_type_avatar">
+      <div class="popup__container_avatar">
+        <h2 class="popup__title">Обновить аватар</h2>
+        <form name="formAvatar" class="form">
+          <fieldset class="popup__fieldset">
+            <input id="input-url-avtar" type="url" name="urlAvatar" placeholder="Ссылка на картинку" class="popup__input popup__input_type_url-avatar" required>
+            <span class="popup__span input-url-avtar-error"></span>
+          </fieldset>
+          <button class="popup__btn-save popup__btn-save-disable button" type="submit" disabled="true">Сохранить</button>
         </form>
         <button class="popup__btn-exit button" type="button"></button>
       </div>

@@ -48,7 +48,6 @@ _setEventListeners() {
 _statusLike() {
   this._span = this._element.querySelector('.card__span')
   if(this._data.likes.some(id => id._id === this._id)) {
-  //if(this._element.querySelector('.card__like').classList.contains('card__like_active') == true) {
     this._del()
     .then(res=>{this._data = res,this._span.textContent = res.likes.length})
   } else {
