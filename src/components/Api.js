@@ -52,8 +52,8 @@ export default class Api {
     });
   };
 
-  deleteCards() {
-    return fetch(`${this._baseUrl}/cards/${this._cardId}`, {
+  deleteCards(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: 'DELETE',
       headers: this._headers
    });
@@ -63,14 +63,24 @@ export default class Api {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: 'PUT',
       headers: this._headers
-  });
-};
+  })
+  .then(res =>  {
+    if (res.ok) {
+      return res.json();
+    }})
+}
 
   deleteLike(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: 'DELETE',
       headers: this._headers
-  });
+  })
+  .then(res =>  {
+    if (res.ok) {
+      return res.json();
+    }
+  
+  })
 };
 
 }// конец файла
