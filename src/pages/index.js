@@ -2,7 +2,7 @@ import './index.css';
 import {
 btnAdd, btnOpenProfileEdit, nameInput, nameProfile, photo, popupAdd, popupImg, popupProfile,
 work, workInput, namePlaceInput, urlImgInput, popupDelete, btnDel, myId, overlay, avatarEdit, popupAvatar,
-btaAvatarEdit
+btnAvatarEdit, profileAvtar
 } from '../utils/constlist.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
@@ -38,7 +38,9 @@ const api = new Api({
 // Добавление карточек 
 const submitInputPhoto = (item) => {
   const inputPlace = { name: item.placename, link: item.urlimg, likes: [], owner:{_id: '44ed7b7962d6cfb8fdf85daa'} };
-  photo.prepend(renderer(inputPlace))
+  //photo.prepend(renderer(inputPlace))
+  renderer(inputPlace)
+  arr();
 };
 
 const popupImage = new PopupWithImage(popupImg);
@@ -62,7 +64,7 @@ const renderer = (item) => {
   return cardCreate.generateCard()
 };
 
-api.getInitialCards()
+const arr = () =>api.getInitialCards()
   .then((res) => {const cardList = new Section(
     {
       items: res,
@@ -72,7 +74,7 @@ api.getInitialCards()
     cardList.rendererElement()
   }
   );
-
+  arr();
 const userInfo = new UserInfo(nameProfile, work);
 
 const validProfile = new FormValidator(popupProfile, selectors);
@@ -82,7 +84,8 @@ const validAvatar = new FormValidator(popupAvatar, selectors);
 
 const popupWithFormAdd = new PopupWithForm({
   popup: popupAdd,
-  submit: (item) => {api.loadImg(namePlaceInput.value, urlImgInput.value),
+  submit: (item) => {
+    api.loadImg(item)
     submitInputPhoto(item),
     popupWithFormAdd.close()}
 });
@@ -98,13 +101,13 @@ const popupWithFormDeleting = new PopupWithForm({
   popup: popupDelete,
   submit: () => {
     popupWithFormDeleting.close()}
-    
 });
 
 const popupWithFormAvatar = new PopupWithForm({
   popup: popupAvatar,
-  submit: () => {
-    popupWithFormDeleting.close()}
+  submit: (item) => {
+    api.loadAvatar(item).then(res => profileAvtar.src = res.avatar)
+    popupWithFormAvatar.close()}
     
 });
 
@@ -118,6 +121,7 @@ validAvatar.enableValidation();
 popupWithFormAdd.setEventListeners();
 popupWithFormProfile.setEventListeners();
 popupWithFormDeleting.setEventListeners();
+popupWithFormAvatar.setEventListeners();
 
 //Открытие попап профиля по кнопке
 btnOpenProfileEdit.addEventListener('click', () => {
@@ -132,13 +136,14 @@ btnAdd.addEventListener('click', () => {
   popupWithFormAdd.open()
 });
 
-btaAvatarEdit.addEventListener('click', () => {
+btnAvatarEdit.addEventListener('click', () => {
   popupWithFormAvatar.open(),
   validAvatar.resetValidation()
 })
 
-api.getUserInfo()
+api.UserInfo()
   .then((res)=>{
   nameProfile.textContent = res.name,
-  work.textContent = res.about
+  work.textContent = res.about,
+  profileAvtar.src = res.avatar
 })

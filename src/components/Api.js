@@ -19,7 +19,7 @@ export default class Api {
       .catch((error) => { console.log(error) })
   };
 
-  getUserInfo() {
+  UserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers
     })
@@ -41,13 +41,18 @@ export default class Api {
     });
   };
 
-  loadImg(name, link) {
+  loadImg(item) {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify({
-        name: name,
-        link: link
+        name: item.placename,
+        link: item.urlimg
+      })
+      .then(res =>  {
+        if (res.ok) {
+          return res.json();
+        }
       })
     });
   };
@@ -80,6 +85,21 @@ export default class Api {
       return res.json();
     }
   })
+};
+
+loadAvatar(link) {
+  return fetch(`${this._baseUrl}/users/me/avatar`, {
+    method: 'PATCH',
+    headers: this._headers,
+    body: JSON.stringify({
+      avatar: link.urlAvatar
+    })
+})
+.then(res =>  {
+  if (res.ok) {
+    return res.json();
+  }
+})
 };
 
 }// конец файла
