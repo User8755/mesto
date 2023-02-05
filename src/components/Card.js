@@ -8,7 +8,7 @@ export default class Card {
     this._openPopupDel = openPopupDel;
     this._id = id
     this._likesClickFunc = likesClickFunc
-    this._del = delLike
+    this._delLike = delLike
   };
 
 _getCard() {
@@ -52,7 +52,7 @@ _setEventListeners() {
 _statusLike() {
   this._span = this._element.querySelector('.card__span')
   if(this._data.likes.some(id => id._id === this._id)) {
-    this._del()
+    this._delLike()
     .then(res=>{this._data = res,this._span.textContent = res.likes.length})
   } else {
     this._likesClickFunc()

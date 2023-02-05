@@ -13,10 +13,9 @@ export default class Api {
         if (res.ok) {
           return res.json()
         }
-        return Promise.reject(new Error('ошибка загрузки').catch((error) => { console.error(error) }))
       }
       )
-      .catch((error) => { console.log(error) })
+      .catch((error) => {console.log(error)})
   };
 
   UserInfo() {
@@ -28,7 +27,7 @@ export default class Api {
           return res.json();
         }
       })
-      .catch((error) => { console.log(error) })
+      .catch((error) => {console.log(error)})
   };
 
   updateUserInfo(name, about) {
@@ -45,7 +44,7 @@ export default class Api {
         return res.json();
       }
     })
-    .catch((error) => { console.log(error) })
+    .catch((error) => {console.log(error)})
   };
 
   loadImg(item) {
@@ -62,7 +61,7 @@ export default class Api {
           return res.json();
         }
       })
-    .catch((error) => { console.log(error) })
+    .catch((error) => {console.log(error)})
   };
 
   deleteCards(cardId) {
@@ -75,7 +74,7 @@ export default class Api {
       return res.json();
     }
   })
-.catch((error) => { console.log(error) })
+.catch((error) => {console.log(error)})
   };
 
   putLike(cardId) {
@@ -87,7 +86,7 @@ export default class Api {
     if (res.ok) {
       return res.json();
     }})
-    .catch((error) => { console.log(error) })
+    .catch((error) => {console.log(error)})
 }
 
   deleteLike(cardId) {
@@ -100,7 +99,7 @@ export default class Api {
       return res.json();
     }
   })
-  .catch((error) => { console.log(error) })
+  .catch((error) => {console.log(error)})
 };
 
 loadAvatar(link) {
@@ -116,7 +115,7 @@ loadAvatar(link) {
     return res.json();
   }
 })
-.catch((error) => { console.log(error) })
+.catch((error) => {console.log(error)})
 };
 
 }// конец файла

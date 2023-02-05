@@ -56,7 +56,7 @@ const renderer = (item) => {
   },
     id: myId,
     likesClickFunc: () => api.putLike(cardCreate.getCardId()),
-    del: () => api.deleteLike(cardCreate.getCardId()),
+    delLike: () => api.deleteLike(cardCreate.getCardId()),
   })
 
   return cardCreate
