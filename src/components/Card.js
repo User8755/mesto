@@ -1,5 +1,5 @@
 export default class Card {
-  constructor(name, link, templateSelector, handleOpenPopupWithImage, data, openPopupDel, id, likesClickFunc, del) {
+  constructor(name, link, templateSelector, handleOpenPopupWithImage, data, openPopupDel, id, likesClickFunc, del, delCard) {
     this._templateSelector = templateSelector;
     this._link = link;
     this._name = name;
@@ -9,7 +9,7 @@ export default class Card {
     this._id = id
     this._likesClickFunc = likesClickFunc
     this._del = del
-    //this._span = this._element.querySelector('.card__span')
+    this.delCard = delCard
   };
 
 _getCard() {
@@ -31,18 +31,27 @@ _deleteCard() {
     this._element = null;
 };
 
-_setEventListeners() {
-  this._cardLike = this._element.querySelector('.card__like');
-  this._cardImg.addEventListener('click', this._handleOpenPopupWithImage);
-  this._element.querySelector('.card__btn-delete').addEventListener('click',() => {this._openPopupDel()});
-  this._cardLike.addEventListener('click',() => { 
-    this._cardLike.classList.toggle('card__like_active'),
-    this._statusLike()
-  });
+_hideBtnTrash() {
   if (this._data.owner._id != this._id)
   {
     this._element.querySelector ('.card__btn-delete').classList.add('popup__btn-delete_hiden')
   }
+}
+
+_setEventListeners() {
+  this._cardLike = this._element.querySelector('.card__like');
+  this._cardImg.addEventListener('click', this._handleOpenPopupWithImage);
+  this._element.querySelector('.card__btn-delete').addEventListener('click',() => {
+    this._openPopupDel(),
+    document.querySelector('.popup_type_delete').addEventListener('submit',()=>{this.delCard(this), this._deleteCard()})
+
+  });
+  this._cardLike.addEventListener('click',() => { 
+    this._cardLike.classList.toggle('card__like_active'),
+    this._statusLike()
+  });
+  
+  this._hideBtnTrash()
 };
 
 _statusLike() {
@@ -58,7 +67,7 @@ _statusLike() {
 
 getCardId() {
   this.obj = this._data
-
+  console.log(this.obj)
   return this.obj
 };
 

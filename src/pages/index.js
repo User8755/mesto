@@ -35,14 +35,6 @@ const api = new Api({
   'Content-Type': 'application/json'}
 })
 
-// Добавление карточек 
-const submitInputPhoto = (item) => {
-  const inputPlace = { name: item.placename, link: item.urlimg, likes: [], owner:{_id: '44ed7b7962d6cfb8fdf85daa'} };
-  //photo.prepend(renderer(inputPlace))
-  renderer(inputPlace)
-  arr();
-};
-
 const popupImage = new PopupWithImage(popupImg);
 
 const popupImgPreview = (name, link) => {
@@ -59,22 +51,24 @@ const renderer = (item) => {
     ()=> popupWithFormDeleting.open(),
     myId,
     () => api.putLike(cardCreate.getCardId()._id),
-    () => api.deleteLike(cardCreate.getCardId()._id)
+    () => api.deleteLike(cardCreate.getCardId()._id),
+    () => api.deleteCards(cardCreate.getCardId()._id)
   )
-  return cardCreate.generateCard()
+
+  return cardCreate
 };
 
-const arr = () =>api.getInitialCards()
+api.getInitialCards()
   .then((res) => {const cardList = new Section(
     {
       items: res,
-      renderer: (item) => {cardList.addItem(renderer(item))}
+      renderer: (item) => {cardList.addItem(renderer(item).generateCard())}
     },
       photo)
     cardList.rendererElement()
   }
   );
-  arr();
+
 const userInfo = new UserInfo(nameProfile, work);
 
 const validProfile = new FormValidator(popupProfile, selectors);
@@ -86,7 +80,7 @@ const popupWithFormAdd = new PopupWithForm({
   popup: popupAdd,
   submit: (item) => {
     api.loadImg(item)
-    submitInputPhoto(item),
+    .then(res => photo.prepend(renderer(res).generateCard()))
     popupWithFormAdd.close()}
 });
 
@@ -147,3 +141,5 @@ api.UserInfo()
   work.textContent = res.about,
   profileAvtar.src = res.avatar
 })
+
+//btnDel.addEventListener('click',renderer().getCardId)
