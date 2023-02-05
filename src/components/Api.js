@@ -5,29 +5,31 @@ export default class Api {
     this._headers = headers
   };
 
+_checkRes(res) {
+  if (res.ok) {
+    return res.json()
+  } else {
+    return Promise.reject(`Error: ${res.status}`)
+  }
+  
+};
+
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json()
-        }
-      }
+      .then(
+        this._checkRes
       )
-      .catch((error) => {console.log(error)})
   };
 
   UserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-      })
-      .catch((error) => {console.log(error)})
+    .then((
+      this._checkRes
+    ))
   };
 
   updateUserInfo(name, about) {
@@ -39,12 +41,9 @@ export default class Api {
         about: about
       })
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-    })
-    .catch((error) => {console.log(error)})
+    .then((
+      this._checkRes
+    ))
   };
 
   loadImg(item) {
@@ -56,12 +55,9 @@ export default class Api {
         link: item.urlimg
       })
     })
-      .then(res =>  {
-        if (res.ok) {
-          return res.json();
-        }
-      })
-    .catch((error) => {console.log(error)})
+    .then((
+      this._checkRes
+    ))
   };
 
   deleteCards(cardId) {
@@ -69,12 +65,9 @@ export default class Api {
       method: 'DELETE',
       headers: this._headers
    })
-   .then(res =>  {
-    if (res.ok) {
-      return res.json();
-    }
-  })
-.catch((error) => {console.log(error)})
+   .then((
+    this._checkRes
+  ))
   };
 
   putLike(cardId) {
@@ -82,11 +75,9 @@ export default class Api {
       method: 'PUT',
       headers: this._headers
   })
-  .then(res =>  {
-    if (res.ok) {
-      return res.json();
-    }})
-    .catch((error) => {console.log(error)})
+  .then((
+    this._checkRes
+  ))
 }
 
   deleteLike(cardId) {
@@ -94,12 +85,9 @@ export default class Api {
       method: 'DELETE',
       headers: this._headers
   })
-  .then(res =>  {
-    if (res.ok) {
-      return res.json();
-    }
-  })
-  .catch((error) => {console.log(error)})
+   .then((
+    this._checkRes
+  ))
 };
 
 loadAvatar(link) {
@@ -110,12 +98,8 @@ loadAvatar(link) {
       avatar: link.urlAvatar
     })
 })
-.then(res =>  {
-  if (res.ok) {
-    return res.json();
-  }
-})
-.catch((error) => {console.log(error)})
+  .then((
+    this._checkRes
+  ))
 };
-
-}// конец файла
+}

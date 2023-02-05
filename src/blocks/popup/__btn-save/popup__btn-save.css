@@ -1,7 +1,6 @@
 .popup__btn-save {
   background-color: #000;
   color: #fff;
-  /*margin: 47px auto 36px;*/
   border-radius: 2px;
   border: none;
   display: block;
@@ -11,7 +10,8 @@
   line-height: 22px;
   text-align: center;
   cursor: pointer;
-  padding: 14px 131px;
+  width: 360px;
+  height: 54px;
   position: absolute;
   bottom: 36px;
   left: 36px;
@@ -25,13 +25,13 @@
   opacity: 0.2;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 530px) {
   .popup__btn-save {
     font-size: 14px;
     line-height: 17px;
-    padding-left: 82px;
-    padding-right: 82px;
     left: 22px;
     bottom: 25px;
+    width: 241px;
+    height: 49px;
   }
 }
