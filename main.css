@@ -5,7 +5,7 @@
 .button{background-color:#fff;border:none;padding:0;transition:opacity .7s ease}
 .popup__fieldset{border:none;margin:0 36px;padding:0}@media screen and (max-width:530px){.popup__fieldset{margin:0 22px}}
 .popup__btn-save-disable:disabled{background-color:#e5e5e5;border:2px solid #000;color:#000;opacity:.2}
-.popup__container_delete{background-color:#fff;border-radius:10px;max-height:181px;min-width:282px;position:relative}@media screen and (min-width:530px){.popup__container_delete{min-width:430px}}
+.popup__container-delete{background-color:#fff;border-radius:10px;max-height:181px;min-width:282px;position:relative}@media screen and (min-width:530px){.popup__container_delete{min-width:430px}}
 .popup__btn-delete{background-color:#000;color:#fff;display:block;font-size:18px;font-weight:400;line-height:22px;margin:38px auto 36px;min-width:85%;padding:18px 125px;text-align:center}
 .popup__input_type_error:invalid{border-bottom-color:red}
 .popup__span{color:red;font-size:12px;font-style:normal;font-weight:400;line-height:15px;margin-top:5px}.popup__span:nth-child(2){position:absolute}
@@ -52,5 +52,5 @@
 .popup_type_img{background-color:rgba(0,0,0,.9)}
 .popup__container_avatar{background-color:#fff;border-radius:10px;height:272px;position:relative;width:430px}
 .input-url-avtar-error:nth-child(2){position:relative}
-.popup_type_promes-overlay{background-color:#000}
+.popup_type_promes-overlay{background-color:#000;max-width:1280px;top:117px}
 
