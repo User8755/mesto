@@ -27,8 +27,4 @@ export default class PopupWithForm extends Popup {
     super.close();
     this._form.reset();
   };
-
-  del(item) {
-    this._popup.querySelector('.popup__btn-delete').addEventListener('click',()=>console.log(item))
-  }
 };

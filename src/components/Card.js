@@ -1,5 +1,5 @@
 export default class Card {
-  constructor(name, link, templateSelector, handleOpenPopupWithImage, data, openPopupDel, id, likesClickFunc, del, delCard) {
+  constructor({name, link, templateSelector, handleOpenPopupWithImage, data, openPopupDel, id, likesClickFunc, delLike}) {
     this._templateSelector = templateSelector;
     this._link = link;
     this._name = name;
@@ -8,8 +8,7 @@ export default class Card {
     this._openPopupDel = openPopupDel;
     this._id = id
     this._likesClickFunc = likesClickFunc
-    this._del = del
-    this.delCard = delCard
+    this._del = delLike
   };
 
 _getCard() {
@@ -26,7 +25,7 @@ _getCard() {
 //   this.classList.toggle('card__like_active');
 // };
 
-_deleteCard() {
+deleteCard() {
     this._element.closest('.card').remove();
     this._element = null;
 };
@@ -36,16 +35,12 @@ _hideBtnTrash() {
   {
     this._element.querySelector ('.card__btn-delete').classList.add('popup__btn-delete_hiden')
   }
-}
+};
 
 _setEventListeners() {
   this._cardLike = this._element.querySelector('.card__like');
   this._cardImg.addEventListener('click', this._handleOpenPopupWithImage);
-  this._element.querySelector('.card__btn-delete').addEventListener('click',() => {
-    this._openPopupDel(),
-    document.querySelector('.popup_type_delete').addEventListener('submit',()=>{this.delCard(this), this._deleteCard()})
-
-  });
+  this._element.querySelector('.card__btn-delete').addEventListener('click',()=> {this._openPopupDel()})
   this._cardLike.addEventListener('click',() => { 
     this._cardLike.classList.toggle('card__like_active'),
     this._statusLike()
@@ -66,9 +61,7 @@ _statusLike() {
 }
 
 getCardId() {
-  this.obj = this._data
-  console.log(this.obj)
-  return this.obj
+  return this._data._id
 };
 
 generateCard() {
@@ -82,8 +75,7 @@ generateCard() {
     this._element.querySelector('.card__like').classList.add('card__like_active')
   }
   this._setEventListeners();
-  
-  
+
   return this._element
 };
 

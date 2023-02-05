@@ -12,17 +12,13 @@ import Section from '../components/Section.js';
 import { selectors } from '../utils/selectors.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
+import PopupWithConfirmation from '../components/PopupWithConfirmation.js';
 
-const ovetlay = (evt) => {if (evt.type == 'mouseover') {
-  evt.target.classList.toggle('profile__avatar-img-visibility')
-}
-if (evt.type == 'mouseout') {
-  evt.target.classList.toggle('profile__avatar-img-visibility')
-}
-}
+const popupWithConfirmation = new PopupWithConfirmation(popupDelete);
 
 overlay.addEventListener('mouseover',() => avatarEdit.classList.add('profile__avatar-img-visibility'))
 overlay.addEventListener('mouseout',() => avatarEdit.classList.remove('profile__avatar-img-visibility'))
+
 //Текст в полях ввода 
 const checkProfileText = () => {
   nameInput.value = userInfo.getUserInfo().profilename;
@@ -42,18 +38,26 @@ const popupImgPreview = (name, link) => {
 };
 
 const renderer = (item) => {
-  const cardCreate = new Card(
-    item.name,
-    item.link,
-    '.photo-card',
-    () => popupImgPreview(item.name, item.link),
-    item,
-    ()=> popupWithFormDeleting.open(),
-    myId,
-    () => api.putLike(cardCreate.getCardId()._id),
-    () => api.deleteLike(cardCreate.getCardId()._id),
-    () => api.deleteCards(cardCreate.getCardId()._id)
-  )
+  const cardCreate = new Card({
+    name: item.name,
+    link: item.link,
+    templateSelector: '.photo-card',
+    handleOpenPopupWithImage: () => popupImgPreview(item.name, item.link),
+    data: item,
+    openPopupDel: ()=> {
+    popupWithConfirmation.open();
+    popupWithConfirmation.setSubmitHandler(item,(item)=>{
+      api.deleteCards(item._id)
+      .then(()=>{
+        popupWithConfirmation.close()
+        cardCreate.deleteCard()
+      })
+    })
+  },
+    id: myId,
+    likesClickFunc: () => api.putLike(cardCreate.getCardId()),
+    del: () => api.deleteLike(cardCreate.getCardId()),
+  })
 
   return cardCreate
 };
@@ -91,11 +95,11 @@ const popupWithFormProfile = new PopupWithForm({
     popupWithFormProfile.close()}
 });
 
-const popupWithFormDeleting = new PopupWithForm({
-  popup: popupDelete,
-  submit: () => {
-    popupWithFormDeleting.close()}
-});
+// const popupWithFormDeleting = new PopupWithForm({
+//   popup: popupDelete,
+//   submit: () => {
+//     popupWithFormDeleting.close()
+// }});
 
 const popupWithFormAvatar = new PopupWithForm({
   popup: popupAvatar,
@@ -114,8 +118,8 @@ validAvatar.enableValidation();
 
 popupWithFormAdd.setEventListeners();
 popupWithFormProfile.setEventListeners();
-popupWithFormDeleting.setEventListeners();
 popupWithFormAvatar.setEventListeners();
+popupWithConfirmation.setEventListeners()
 
 //Открытие попап профиля по кнопке
 btnOpenProfileEdit.addEventListener('click', () => {
@@ -141,5 +145,3 @@ api.UserInfo()
   work.textContent = res.about,
   profileAvtar.src = res.avatar
 })
-
-//btnDel.addEventListener('click',renderer().getCardId)
