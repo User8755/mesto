@@ -7,7 +7,7 @@
 }
 
 @media screen and (min-width: 530px) {
-  .popup__container_delete {
+  .popup__container-delete {
     min-width: 430px;
   }
 }
