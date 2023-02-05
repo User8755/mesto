@@ -6,7 +6,7 @@
 @import url(../blocks/button/button.css);
 @import url(../blocks/popup/__fieldset/popup__fieldset.css);
 @import url(../blocks/popup/__btn-save/popup__btn-save-disable.css);
-@import url(../blocks/popup/__container/_delete/popup__container_delete.css);
+@import url(../blocks/popup/__container/popup__container-delete.css);
 @import url(../blocks/popup/__btn-delete/popup__btn-delete.css);
 @import url(../blocks/popup/__input/popup__input_type_error.css);
 @import url(../blocks/popup/__span/popup__span.css);
