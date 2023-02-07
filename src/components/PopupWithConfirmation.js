@@ -26,6 +26,5 @@ export default class PopupWithConfirmation extends Popup {
 
   close() {
     super.close();
-    setTimeout(()=>(this._btnDel.textContent = 'Да'), 1000)
   };
 };

@@ -21,10 +21,6 @@ _getCard() {
     return dataCard
 }
 
-// _likeCard() {
-//   this.classList.toggle('card__like_active');
-// };
-
 deleteCard() {
     this._element.closest('.card').remove();
     this._element = null;
@@ -42,7 +38,6 @@ _setEventListeners() {
   this._cardImg.addEventListener('click', this._handleOpenPopupWithImage);
   this._element.querySelector('.card__btn-delete').addEventListener('click',()=> {this._openPopupDel()})
   this._cardLike.addEventListener('click',() => { 
-    this._cardLike.classList.toggle('card__like_active'),
     this._statusLike()
   });
   
@@ -50,13 +45,15 @@ _setEventListeners() {
 };
 
 _statusLike() {
-  this._span = this._element.querySelector('.card__span')
+  this._likesToggleStatus = this._cardLike.classList.toggle('card__like_active')
   if(this._data.likes.some(id => id._id === this._id)) {
     this._delLike()
-    .then(res=>{this._data = res,this._span.textContent = res.likes.length})
+    .then(res=>{this._data = res, this._likesToggleStatus, this._span.textContent = res.likes.length})
+    .catch((error) => {console.log(error)})
   } else {
     this._likesClickFunc()
-    .then(res=>{this._data = res, this._span.textContent = res.likes.length})
+    .then(res=>{this._data = res, this._likesToggleStatus ,this._span.textContent = res.likes.length})
+    .catch((error) => {console.log(error)})
   }
 }
 
@@ -66,11 +63,12 @@ getCardId() {
 
 generateCard() {
   this._element = this._getCard();
+  this._span = this._element.querySelector('.card__span');
   this._cardImg = this._element.querySelector('.card__img');
   this._cardImg.src = this._link; 
   this._cardImg.alt = this._name; 
   this._element.querySelector('.card__title').textContent = this._name;
-  this._element.querySelector('.card__span').textContent = this._data.likes.length;
+  this._span.textContent = this._data.likes.length;
   if(this._data.likes.some(id => id._id === this._id)) {
     this._element.querySelector('.card__like').classList.add('card__like_active')
   }

@@ -2,7 +2,7 @@ import './index.css';
 import {
   btnAdd, btnOpenProfileEdit, nameInput, nameProfile, photo, popupAdd, popupImg, popupProfile,
   work, workInput, popupDelete, myId, overlay, avatarEdit, popupAvatar,
-  btnAvatarEdit, profileAvtar, PromesOverlay
+  btnAvatarEdit, profileAvatar, PromesOverlay, btnDelCards
 } from '../utils/constlist.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
@@ -23,8 +23,9 @@ overlay.addEventListener('mouseout', () => avatarEdit.classList.remove('profile_
 
 //Текст в полях ввода 
 const checkProfileText = () => {
-  nameInput.value = userInfo.getUserInfo().profilename;
-  workInput.value = userInfo.getUserInfo().profilework;
+  const infoInput = userInfo.getUserInfo();
+  nameInput.value = infoInput.profilename;
+  workInput.value = infoInput.profilework;
 };
 
 const api = new Api({
@@ -41,6 +42,10 @@ const popupImgPreview = (name, link) => {
   popupImage.open(name, link);
 };
 
+const toggleTextBtn = (popup) => {
+  popup.querySelector('.popup__btn-save').textContent = 'Сохранить'
+}
+
 const renderer = (item) => {
   const cardCreate = new Card({
     name: item.name,
@@ -54,12 +59,13 @@ const renderer = (item) => {
         api.deleteCards(item._id)
           .then(() => {
             cardCreate.deleteCard()
+            setTimeout(()=>(popupWithConfirmation.close()), 200)
           })
           .catch((error) => {console.log(error)})
-          .finally(setTimeout(()=>(popupWithConfirmation.close()), 500))
+          .finally(setTimeout(()=>{btnDelCards.textContent = 'Да'}, 1000))
       })
     },
-    id: myId,
+    id: userInfo.getUserInfo().id,
     likesClickFunc: () => api.putLike(cardCreate.getCardId()),
     delLike: () => api.deleteLike(cardCreate.getCardId())
       .catch((error) => {console.log(error)}),
@@ -68,19 +74,17 @@ const renderer = (item) => {
   return cardCreate
 };
 
+const cardList = new Section({
+  renderer: (item) => {cardList.addItem(renderer(item).generateCard())}},
+  photo)
+
 api.getInitialCards()
   .then((res) => {
-    const cardList = new Section(
-      {
-        items: res,
-        renderer: (item) => { cardList.addItem(renderer(item).generateCard()) }
-      },
-      photo)
-    cardList.rendererElement()
+    cardList.rendererElement(res)
   })
   .catch((error) => {console.log(`OMG ERROR T_T: ${error}`)})
 
-const userInfo = new UserInfo(nameProfile, work);
+const userInfo = new UserInfo(nameProfile, work, profileAvatar, myId);
 
 const validProfile = new FormValidator(popupProfile, selectors);
 const validNewCard = new FormValidator(popupAdd, selectors);
@@ -90,18 +94,22 @@ const popupWithFormAdd = new PopupWithForm({
   popup: popupAdd,
   submit: (item) => {
     api.loadImg(item)
-      .then((res) => {photo.prepend(renderer(res).generateCard())})
+      .then((res) => {
+        cardList.addItem(renderer(res).generateCard()),
+        setTimeout(()=>(popupWithFormAdd.close()), 500)
+      })
       .catch((err)=> console.log(err))
-      .finally(setTimeout(()=>(popupWithFormAdd.close()), 500))
+      .finally(setTimeout(()=>(toggleTextBtn(popupAdd)), 1000))
   }
 });
 
 const popupWithFormProfile = new PopupWithForm({
   popup: popupProfile,
-  submit: (item) => {
-    userInfo.setUserInfo(item),
+  submit: () => {
     api.updateUserInfo(nameInput.value, workInput.value)
-    .finally(setTimeout(()=>(popupWithFormProfile.close()), 500))
+    .then((res)=>{userInfo.setUserInfo(res), setTimeout(()=>(popupWithFormProfile.close()), 500)})
+    .catch((err)=> console.log(err))
+    .finally(setTimeout(()=>(toggleTextBtn(popupProfile)), 1000))
   }
 });
 
@@ -109,9 +117,9 @@ const popupWithFormAvatar = new PopupWithForm({
   popup: popupAvatar,
   submit: (item) => {
     api.loadAvatar(item)
-      .then(res => profileAvtar.src = res.avatar)
+      .then(res => {profileAvatar.src = res.avatar, setTimeout(()=>(popupWithFormAvatar.close()), 500)})
       .catch((error) => {console.log(error)})
-      .finally(setTimeout(()=>(popupWithFormAvatar.close()), 500))
+      .finally(setTimeout(()=>(toggleTextBtn(popupAvatar)), 1000))
   }
 
 });
@@ -131,7 +139,7 @@ popupImage.setEventListeners();
 //Открытие попап профиля по кнопке
 btnOpenProfileEdit.addEventListener('click', () => {
   popupWithFormProfile.open(),
-    validProfile.resetValidation(),
+    validProfile.resetValidation()
     checkProfileText()
 });
 
@@ -146,26 +154,16 @@ btnAvatarEdit.addEventListener('click', () => {
     validAvatar.resetValidation()
 })
 
-api.UserInfo()
+api.userInfoApi()
   .then((res) => {
-    nameProfile.textContent = res.name,
-      work.textContent = res.about,
-      profileAvtar.src = res.avatar
+    userInfo.setUserInfo(res)
   })
   .catch((error) => {console.log(error)})
 
-  const renderLoading = (isLoading) => {
-    if (isLoading) {
-      PromesOverlay.classList.add('popup_visible')
-    } else {
-      PromesOverlay.classList.remove('popup_visible')
-    }
-  }
-
-
-  const promises = [api.UserInfo(), api.getInitialCards()]
-
-  Promise.all(promises)
-    .then(() =>{renderLoading(true)})
+  userInfo.getUserInfo()
+  Promise.all([api.userInfoApi(), api.getInitialCards()])
+    .then(([userData, cards]) =>{
+      
+    })
     .catch((error) => {console.log(`Почему????: ${error}`)})
-    .finally(setTimeout(()=>{renderLoading(false)}, 2000))
+    .finally(setTimeout(()=>{PromesOverlay.classList.remove('popup_visible')}, 2000))
