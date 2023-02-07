@@ -9,7 +9,8 @@
 .popup__btn-delete{background-color:#000;color:#fff;display:block;font-size:18px;font-weight:400;line-height:22px;margin:38px auto 36px;min-width:85%;padding:18px 125px;text-align:center}
 .popup__input_type_error:invalid{border-bottom-color:red}
 .popup__span{color:red;font-size:12px;font-style:normal;font-weight:400;line-height:15px;margin-top:5px}.popup__span:nth-child(2){position:absolute}
-.main{min-height:65vh}
+.main{display:none;min-height:65vh}
+.main_visible{display:block}
 .header{border-bottom:1px solid rgba(84,84,84,.7);margin:0 auto;max-width:68.75%;padding:0}@media screen and (max-width:320px){.header{max-width:100%}}
 .header__logo{margin-top:45px;max-width:142px;padding-bottom:35px}@media screen and (max-width:320px){.header__logo{margin-top:28px;max-width:103.74px;padding-bottom:28.6px;padding-left:27px}}
 .profile{align-items:center;display:flex;margin:43.25px auto 0;max-width:68.75%;position:relative}@media screen and (max-width:1000px){.profile{flex-direction:column;margin-top:41.25px;max-width:100%}}
