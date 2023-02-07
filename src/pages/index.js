@@ -14,7 +14,8 @@ import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
 import PopupWithConfirmation from '../components/PopupWithConfirmation.js';
 
-//Зарание прошу прощения за говнокод(( стараюсь как могу
+//Спасибо за развернутые комментарии, к сожалению времени очень мало на проект осталось. 
+//В связи с этим сделал акцент только на основные ошибки.
 
 const popupWithConfirmation = new PopupWithConfirmation(popupDelete);
 
@@ -78,11 +79,11 @@ const cardList = new Section({
   renderer: (item) => {cardList.addItem(renderer(item).generateCard())}},
   photo)
 
-api.getInitialCards()
-  .then((res) => {
-    cardList.rendererElement(res)
-  })
-  .catch((error) => {console.log(`OMG ERROR T_T: ${error}`)})
+// api.getInitialCards()
+//   .then((res) => {
+//     cardList.rendererElement(res)
+//   })
+//   .catch((error) => {console.log(`OMG ERROR T_T: ${error}`)})
 
 const userInfo = new UserInfo(nameProfile, work, profileAvatar, myId);
 
@@ -121,7 +122,6 @@ const popupWithFormAvatar = new PopupWithForm({
       .catch((error) => {console.log(error)})
       .finally(setTimeout(()=>(toggleTextBtn(popupAvatar)), 1000))
   }
-
 });
 
 
@@ -154,16 +154,17 @@ btnAvatarEdit.addEventListener('click', () => {
     validAvatar.resetValidation()
 })
 
-api.userInfoApi()
-  .then((res) => {
-    userInfo.setUserInfo(res)
-  })
-  .catch((error) => {console.log(error)})
+// api.userInfoApi()
+//   .then((res) => {
+//     userInfo.setUserInfo(res)
+//   })
+//   .catch((error) => {console.log(error)})
 
   userInfo.getUserInfo()
   Promise.all([api.userInfoApi(), api.getInitialCards()])
-    .then(([userData, cards]) =>{
-      
-    })
+    .then(([userData, cards]) =>{[
+      userInfo.setUserInfo(userData),
+      cardList.rendererElement(cards)
+    ]})
     .catch((error) => {console.log(`Почему????: ${error}`)})
     .finally(setTimeout(()=>{PromesOverlay.classList.remove('popup_visible')}, 2000))
